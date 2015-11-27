@@ -98,7 +98,7 @@ void ABETCharacter::OnInteract()
 		GetActorLocation(),
 		FQuat(),
 		ECC_GameTraceChannel2,
-		FCollisionShape::MakeSphere(1000.f),
+		FCollisionShape::MakeSphere(50.f),
 		TraceParams))
 	{
 		for (FOverlapResult Result : Overlaps)

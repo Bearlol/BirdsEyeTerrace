@@ -67,12 +67,9 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	// set up gameplay key bindings
 	check(InputComponent);
 	
-	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ABETCharacter::TouchStarted);
-	if( EnableTouchscreenMovement(InputComponent) == false )
-	{
-		InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
-	}
+	InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
 	
+	InputComponent->BindAction("Interact", IE_Pressed, this, &ABETCharacter::OnInteract);
 	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
 	
@@ -83,6 +80,38 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("TurnRate", this, &ABETCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
+}
+
+void ABETCharacter::OnInteract()
+{
+	FCollisionQueryParams TraceParams(FName(TEXT("Interact Trace")), true);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	TraceParams.AddIgnoredActor(this);
+
+	// Re-init hit info
+
+	TArray<FOverlapResult>Overlaps;
+
+	if (GetWorld()->OverlapMultiByChannel(Overlaps,
+		GetActorLocation(),
+		FQuat(),
+		ECC_GameTraceChannel2,
+		FCollisionShape::MakeSphere(1000.f),
+		TraceParams))
+	{
+		for (FOverlapResult Result : Overlaps)
+		{
+			if (ABETInteractable* Interactable = Cast<ABETInteractable>(Result.Actor.Get()))
+			{
+				UE_LOG(LogTemp, Display, TEXT("INTERACTABLE FOUND"));
+				Interactable->Interact();
+			}
+		}
+		
+	}
+
 }
 
 void ABETCharacter::OnFire()

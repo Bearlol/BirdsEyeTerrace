@@ -2,6 +2,7 @@
 #pragma once
 #include "GameFramework/Character.h"
 #include "BETWeapon.h"
+#include "BETInteractable.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -38,6 +39,9 @@ public:
 
 
 protected:
+
+	void OnInteract();
+
 	class ABETWeapon* Weapon;
 	/** Fires a projectile. */
 	void OnFire();

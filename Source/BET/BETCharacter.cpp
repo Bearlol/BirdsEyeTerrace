@@ -35,14 +35,7 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	// Create a gun mesh component
-	FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
-	FP_Gun->SetOnlyOwnerSee(true);			// only the owning player will see this mesh
-	FP_Gun->bCastDynamicShadow = false;
-	FP_Gun->CastShadow = false;
-	FP_Gun->AttachTo(Mesh1P, TEXT("GripPoint"), EAttachLocation::SnapToTargetIncludingScale, true);
-
-
+	ActiveAbility = CreateDefaultSubobject<UBETAbilityComponent>(TEXT("ActiveAbility"));
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -80,6 +73,9 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("TurnRate", this, &ABETCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
+
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
 void ABETCharacter::OnInteract()

@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 #include "BETWeapon.h"
 #include "BETInteractable.h"
+#include "BETAbilityComponent.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -23,6 +24,9 @@ class ABETCharacter : public ACharacter
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+		UBETAbilityComponent* ActiveAbility;
 public:
 	ABETCharacter();
 	virtual void BeginPlay() override;

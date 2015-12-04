@@ -3,6 +3,8 @@
 #include "GameFramework/Character.h"
 #include "BETWeapon.h"
 #include "BETInteractable.h"
+#include "BETAbilityComponent.h"
+#include "BETShoutOut.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -23,8 +25,14 @@ class ABETCharacter : public ACharacter
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+		UBETAbilityComponent* ActiveAbility;
+	
 public:
 	ABETCharacter();
+	UPROPERTY(VisibleAnywhere)
+		UBETShoutOut* CallOut;
 	virtual void BeginPlay() override;
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

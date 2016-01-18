@@ -35,14 +35,7 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	// Create a gun mesh component
-	FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
-	FP_Gun->SetOnlyOwnerSee(true);			// only the owning player will see this mesh
-	FP_Gun->bCastDynamicShadow = false;
-	FP_Gun->CastShadow = false;
-	FP_Gun->AttachTo(Mesh1P, TEXT("GripPoint"), EAttachLocation::SnapToTargetIncludingScale, true);
-
-
+	ActiveAbility = CreateDefaultSubobject<UBETAbilityComponent>(TEXT("ActiveAbility"));
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -67,12 +60,9 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	// set up gameplay key bindings
 	check(InputComponent);
 	
-	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ABETCharacter::TouchStarted);
-	if( EnableTouchscreenMovement(InputComponent) == false )
-	{
-		InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
-	}
+	InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
 	
+	InputComponent->BindAction("Interact", IE_Pressed, this, &ABETCharacter::OnInteract);
 	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
 	
@@ -83,6 +73,41 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("TurnRate", this, &ABETCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
+
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
+}
+
+void ABETCharacter::OnInteract()
+{
+	FCollisionQueryParams TraceParams(FName(TEXT("Interact Trace")), true);
+	TraceParams.bTraceComplex = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	TraceParams.AddIgnoredActor(this);
+
+	// Re-init hit info
+
+	TArray<FOverlapResult>Overlaps;
+
+	if (GetWorld()->OverlapMultiByChannel(Overlaps,
+		GetActorLocation(),
+		FQuat(),
+		ECC_GameTraceChannel2,
+		FCollisionShape::MakeSphere(50.f),
+		TraceParams))
+	{
+		for (FOverlapResult Result : Overlaps)
+		{
+			if (ABETInteractable* Interactable = Cast<ABETInteractable>(Result.Actor.Get()))
+			{
+				UE_LOG(LogTemp, Display, TEXT("INTERACTABLE FOUND"));
+				Interactable->Interact();
+			}
+		}
+		
+	}
+
 }
 
 void ABETCharacter::OnFire()

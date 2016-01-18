@@ -11,8 +11,17 @@ ABETHUD::ABETHUD()
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/FirstPerson/Textures/FirstPersonCrosshair"));
 	CrosshairTex = CrosshiarTexObj.Object;
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> MyWidgetAsset(TEXT("/Game/TestWidget"));
+	TestWidgetClass = Cast<UClass>(MyWidgetAsset.Object->GeneratedClass);
 }
 
+void ABETHUD::BeginPlay()
+{
+	Super::BeginPlay();
+	TestWidget = CreateWidget<UTestWidget>(GetOwningPlayerController(), TestWidgetClass);
+	TestWidget->AddToViewport();
+}
 
 void ABETHUD::DrawHUD()
 {

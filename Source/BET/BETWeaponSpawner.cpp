@@ -36,7 +36,7 @@ void ABETWeaponSpawner::Tick(float DeltaTime)
 
 }
 
-ABETWeapon* ABETWeaponSpawner::SpawnWeapon()
+AWeaponPickUp* ABETWeaponSpawner::SpawnWeapon()
 {
 	TimeToRespawn = MaxRespawnTime;
 	return NULL;

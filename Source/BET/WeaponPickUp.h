@@ -10,13 +10,6 @@
  * 
  */
 
-UENUM ()
-enum EWeaponTypes
-{
-	WEAPON_NONE,
-	WEAPON_AXE
-	// need to add all weapons
-};
 
 
 
@@ -24,19 +17,50 @@ enum EWeaponTypes
 
 
 UCLASS()
+
 class BET_API AWeaponPickUp : public APickUp
 {
 	GENERATED_BODY()
-	
-protected:
-	UPROPERTY(EditAnywhere, Category = PickUp)
-		TEnumAsByte<EWeaponTypes> WeaponType;
 
-	//UPROPERTY(EditAnywhere, Category = PickUp)
-		//TSubclassOf<ABETWeapon> WeaponClass;
+public:
+	TSubclassOf<ABETWeapon>GetWeaponClass(){ return WeaponClass; }
+
+
+protected:
+
+
+	UPROPERTY(EditAnywhere, Category = PickUp)
+		TSubclassOf<ABETWeapon> WeaponClass;
 	// better for a more flexable way to code it
 
 	virtual void OnOverlap(AActor* OtherActor) override;
+
+	//UCLASS()
+	//class BET_API ABETCharacter : public ACharacter
+	//{
+
+
+	//public:
+		//void PickUpWeapon()
+		
+		//	void PickUpWeapon(AWeaponPickUp* WeaponPickUp)
+	//	{
+		//	if (WeaponPickUp->GetWeaponClass())
+			//{
+				//if (CurrentWeapon)
+				//{
+				//	CurrentWeapon->Destroy();
+				//}
+
+				//ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(WeaponPickUp->GetWeaponClass(), FVector, FRotator::ZeroRotator);
+				//Weapon->AttachRootComponentToActor(This, TEXT("HandR"));
+			//HandR will change depending on the name of the hand bone.
+
+				//CurrentWeapon = Weapon;
+		//}
+	//}
 	
-	
+//private:
+	//ABETWeapon *CurrentWeapon;
 };
+

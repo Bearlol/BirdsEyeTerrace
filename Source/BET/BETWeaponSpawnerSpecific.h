@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETWeaponSpawner.h"
+#include "WeaponPickUp.h"
 #include "BETWeaponSpawnerSpecific.generated.h"
 
 /**
@@ -15,10 +16,10 @@ class BET_API ABETWeaponSpawnerSpecific : public ABETWeaponSpawner
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ABETWeapon> WeaponClass;
+		TSubclassOf<AWeaponPickUp> WeaponClass;
 
 protected:
-	virtual ABETWeapon* SpawnWeapon() override;
+	virtual AWeaponPickUp* SpawnWeapon() override;
 		
 };
 //TArray<TSubclassOf<BETWeapon>

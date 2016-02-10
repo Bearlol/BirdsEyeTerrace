@@ -12,11 +12,6 @@ UCLASS()
 class BET_API UClarenceInvisibleAbility : public UBETAbilityComponent
 {
 	GENERATED_BODY()
-		UClarenceInvisibleAbility();
-protected:
-	void TriggerBody(AActor* body);
-	virtual void Use() override;
-
-	UPROPERTY(EditDefaultsOnly)
-		AActor* Owner;
+	
+	
 };

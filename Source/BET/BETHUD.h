@@ -15,12 +15,16 @@ public:
 	/** Primary draw call for the HUD */
 	virtual void DrawHUD() override;
 	virtual void BeginPlay() override;
+	void drawHealthBar();
+	UTexture2D* healthBarTexture;
 
 private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
 	TSubclassOf<UTestWidget> TestWidgetClass;
 	UTestWidget* TestWidget;
+
+	
 
 };
 

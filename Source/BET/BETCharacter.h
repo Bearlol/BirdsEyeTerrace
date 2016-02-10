@@ -27,10 +27,6 @@ class ABETCharacter : public ACharacter
 
 	UPROPERTY(VisibleAnywhere)
 		UBETAbilityComponent* ActiveAbility;
-
-
-
-
 public:
 	ABETCharacter();
 	virtual void BeginPlay() override;
@@ -44,16 +40,14 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ABETWeapon> WeaponClass;
-
-	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
-
-protected:
-	class ABETWeapon *CurrentWeapon;
-	
-
-
-
-
+	UPROPERTY(EditAnywhere)
+		float Health;
+	UPROPERTY(EditAnywhere)
+		float Shield;
+	UFUNCTION()
+		void HealthPickup();
+	UFUNCTION()
+		void ShieldPickup();
 
 protected:
 

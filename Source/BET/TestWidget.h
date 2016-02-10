@@ -3,6 +3,7 @@
 #pragma once
 
 #include "SlateCore.h"
+#include "BETCharacter.h"
 #include "Blueprint/UserWidget.h"
 #include "TestWidget.generated.h"
 
@@ -17,6 +18,10 @@ class BET_API UTestWidget : public UUserWidget
 protected:
 	UFUNCTION(BlueprintCallable, Category = Information)
 		FText GetPlayerName() const;
+	UFUNCTION(BlueprintCallable, Category = Information)
+		float Health() const;
+	UFUNCTION(BlueprintCallable, Category = Information)
+		float Shield() const;
 	
 	
 };

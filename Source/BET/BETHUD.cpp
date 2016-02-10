@@ -12,9 +12,14 @@ ABETHUD::ABETHUD()
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshiarTexObj(TEXT("/Game/FirstPerson/Textures/FirstPersonCrosshair"));
 	CrosshairTex = CrosshiarTexObj.Object;
 
+	//static ConstructorHelpers::FObjectFinder<UTexture2D> HealthBarTexPath(TEXT("/Game/FirstPerson/Textures/health"));
+	//healthBarTexture = HealthBarTexPath.Object;
+
 	static ConstructorHelpers::FObjectFinder<UBlueprint> MyWidgetAsset(TEXT("/Game/TestWidget"));
 	TestWidgetClass = Cast<UClass>(MyWidgetAsset.Object->GeneratedClass);
 }
+
+int32 health = 200;
 
 void ABETHUD::BeginPlay()
 {
@@ -27,8 +32,7 @@ void ABETHUD::DrawHUD()
 {
 	Super::DrawHUD();
 
-	// Draw very simple crosshair
-
+	drawHealthBar();
 	// find center of the Canvas
 	const FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
 
@@ -40,5 +44,11 @@ void ABETHUD::DrawHUD()
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem( TileItem );
+}
+
+void ABETHUD::drawHealthBar()
+{
+	FCanvasIcon HealthBarIcon = UCanvas::MakeIcon(healthBarTexture, 0, 0, health, 20);
+		Canvas->DrawIcon(HealthBarIcon, (Canvas->SizeX)/2.5, 20, 0.0f);
 }
 

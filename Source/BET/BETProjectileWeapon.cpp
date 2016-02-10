@@ -29,5 +29,6 @@ void ABETProjectileWeapon::Fire()
 			// spawn the projectile at the muzzle
 			World->SpawnActor<ABETProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
 		}
+
 	}
 }

@@ -4,6 +4,7 @@
 #include "BETGameMode.h"
 #include "BETHUD.h"
 #include "BETCharacter.h"
+#include "CharacterClarence.h"
 
 ABETGameMode::ABETGameMode()
 	: Super()

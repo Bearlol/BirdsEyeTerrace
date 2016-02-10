@@ -11,6 +11,6 @@ void AWeaponPickUp::OnOverlap(AActor* OtherActor)
 
 	if (Character)
 	{
-		Character->PickUpWeapon(this);
+		//Character->PickUpWeapon();
 	}
 }

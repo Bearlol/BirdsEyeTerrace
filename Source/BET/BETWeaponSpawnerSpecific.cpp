@@ -3,10 +3,10 @@
 #include "BET.h"
 #include "BETWeaponSpawnerSpecific.h"
 
-ABETWeapon* ABETWeaponSpawnerSpecific::SpawnWeapon()
+AWeaponPickUp* ABETWeaponSpawnerSpecific::SpawnWeapon()
 {
 	Super::SpawnWeapon();
-	return GetWorld()->SpawnActor<ABETWeapon>(WeaponClass, 
+	return GetWorld()->SpawnActor<AWeaponPickUp>(WeaponClass,
 		GetActorLocation(), FRotator::ZeroRotator);
 }
 

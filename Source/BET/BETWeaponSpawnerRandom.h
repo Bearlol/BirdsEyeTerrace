@@ -15,13 +15,13 @@ class BET_API ABETWeaponSpawnerRandom : public ABETWeaponSpawner
 	
 protected: 
 	UPROPERTY(EditDefaultsOnly)
-	TArray<TSubclassOf<ABETWeapon>> weaponsList;
+	TArray<TSubclassOf<AWeaponPickUp>> weaponsList;
 	UPROPERTY(EditDefaultsOnly)
 		uint16 random;
 	
 
 	
 protected:
-	virtual ABETWeapon* SpawnWeapon() override;
+	virtual AWeaponPickUp* SpawnWeapon() override;
 	
 };

@@ -10,12 +10,6 @@
  * 
  */
 
-
-
-
-
-
-
 UCLASS()
 
 class BET_API AWeaponPickUp : public APickUp
@@ -25,10 +19,6 @@ class BET_API AWeaponPickUp : public APickUp
 public:
 	TSubclassOf<ABETWeapon>GetWeaponClass(){ return WeaponClass; }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 protected:
 
 
@@ -37,36 +27,5 @@ protected:
 	// better for a more flexable way to code it
 
 	virtual void OnOverlap(AActor* OtherActor) override;
-
-<<<<<<< HEAD
-=======
-	//UCLASS()
-	//class BET_API ABETCharacter : public ACharacter
-	//{
-
-
-	//public:
-		//void PickUpWeapon()
-		
-		//	void PickUpWeapon(AWeaponPickUp* WeaponPickUp)
-	//	{
-		//	if (WeaponPickUp->GetWeaponClass())
-			//{
-				//if (CurrentWeapon)
-				//{
-				//	CurrentWeapon->Destroy();
-				//}
-
-				//ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(WeaponPickUp->GetWeaponClass(), FVector, FRotator::ZeroRotator);
-				//Weapon->AttachRootComponentToActor(This, TEXT("HandR"));
-			//HandR will change depending on the name of the hand bone.
-
-				//CurrentWeapon = Weapon;
-		//}
-	//}
-	
-//private:
-	//ABETWeapon *CurrentWeapon;
->>>>>>> origin/master
 };
 

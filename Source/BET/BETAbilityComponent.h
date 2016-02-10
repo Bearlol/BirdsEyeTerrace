@@ -23,9 +23,7 @@ public:
 
 	virtual bool CanUse() { return TimeToNextUse <= 0.f; }
 
-	void ActivateAbility()   { 
-		bIsActive = true;
-	}
+	void ActivateAbility()   { bIsActive = true;  }
 	void DeactivateAbility() { bIsActive = false; }
 
 protected:

@@ -6,12 +6,3 @@
 
 
 
-ACharacterClarence::ACharacterClarence()
-	:Super()
-
-{
-
-	ActiveAbility = CreateDefaultSubobject<UClarenceInvisibleAbility>(TEXT("ActiveAbility"));
-}
-
-

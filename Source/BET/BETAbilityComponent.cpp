@@ -33,9 +33,11 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 	// ...
 
 	TimeToNextUse -= DeltaTime;
-	if (bIsActive)
+	if (CanUse())
 	{
+	
 		Use();
+	
 	}
 }
 

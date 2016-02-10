@@ -20,14 +20,23 @@ ABETWeapon::ABETWeapon(const FObjectInitializer& ObjectInitializer)
 void ABETWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
+
 
 // Called every frame
 void ABETWeapon::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	isAttacking = true;
+
+	timeToNextAttack -= DeltaTime;
+
+	if (isAttacking && timeToNextAttack <= 0)
+	{
+		timeToNextAttack = AttackSpeed;
+		Fire();
+	}
 }
 
 void ABETWeapon::Fire()

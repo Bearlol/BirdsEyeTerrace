@@ -6,7 +6,6 @@
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
 #include "BETProjectileWeapon.h"
-#include "WeaponPickUp.h"
 #include "BETWeapon.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
@@ -36,12 +35,9 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	ActiveAbility = CreateDefaultSubobject<UBETAbilityComponent>(TEXT("ActiveAbility"));
+
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-
-	CurrentWeapon = NULL;
-
 }
 
 
@@ -79,7 +75,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
 
 	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
-	InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
 void ABETCharacter::OnInteract()
@@ -113,12 +109,10 @@ void ABETCharacter::OnInteract()
 	}
 
 }
-// need to add 2 functions for isfiring, notfiring. when not firing need to set isattacking to false.
 
 void ABETCharacter::OnFire()
 { 
-	if (Weapon)
-	{
+	if (Weapon){
 		Weapon->Fire();
 	}
 
@@ -245,16 +239,4 @@ bool ABETCharacter::EnableTouchscreenMovement(class UInputComponent* InputCompon
 		InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ABETCharacter::TouchUpdate);
 	}
 	return bResult;
-}
-
-void ABETCharacter::PickUpWeapon(AWeaponPickUp * PickedUpWeapon)
-{
-	if (PickedUpWeapon->GetWeaponClass())
-	{
-
-		ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
-		Weapon->AttachRootComponentToActor(this, TEXT("hand_r"));
-		//HandR will change depending on the name of the hand bone.
-		CurrentWeapon = Weapon;
-	}
 }

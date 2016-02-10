@@ -25,11 +25,6 @@ class ABETCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
 
-	UPROPERTY(VisibleAnywhere)
-		UBETAbilityComponent* ActiveAbility;
-
-
-
 
 public:
 	ABETCharacter();
@@ -44,15 +39,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ABETWeapon> WeaponClass;
-
-	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
-
-protected:
-	class ABETWeapon *CurrentWeapon;
-	
-
-
-
 
 
 protected:
@@ -75,6 +61,8 @@ protected:
 	 */
 	void TurnAtRate(float Rate);
 
+	UPROPERTY(EditDefaultsOnly)
+		UBETAbilityComponent* ActiveAbility;
 	/**
 	 * Called via input to turn look up/down at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate

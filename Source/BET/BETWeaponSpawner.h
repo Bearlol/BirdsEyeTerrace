@@ -4,7 +4,6 @@
 
 #include "GameFramework/Actor.h"
 #include "BETWeapon.h"
-#include "WeaponPickUp.h"
 #include "BETWeaponSpawner.generated.h"
 
 UCLASS(Abstract)
@@ -27,8 +26,8 @@ protected:
 	float MaxRespawnTime;
 	float TimeToRespawn;
 
-	AWeaponPickUp* SpawnedWeapon;
+	ABETWeapon* SpawnedWeapon;
 
 protected:
-	virtual AWeaponPickUp* SpawnWeapon();
+	virtual ABETWeapon* SpawnWeapon();
 };

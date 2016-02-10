@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETCharacter.h"
+#include "ClarenceInvisibleAbility.h"
 #include "CharacterClarence.generated.h"
 
 /**
@@ -12,8 +13,9 @@ UCLASS()
 class BET_API ACharacterClarence : public ABETCharacter
 {
 	GENERATED_BODY()
-	
-	
-	
+		ACharacterClarence();
+		UPROPERTY(EditDefaultsOnly)
+		class UStaticMesh* clarenceMesh;
+		
 	
 };

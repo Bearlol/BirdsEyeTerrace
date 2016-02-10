@@ -11,6 +11,10 @@ void AWeaponPickUp::OnOverlap(AActor* OtherActor)
 
 	if (Character)
 	{
+<<<<<<< HEAD
 		Character->PickUpWeapon(this);
+=======
+		//Character->PickUpWeapon();
+>>>>>>> origin/master
 	}
 }

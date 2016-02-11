@@ -25,12 +25,6 @@ class ABETCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
 
-<<<<<<< HEAD
-
-=======
-	UPROPERTY(VisibleAnywhere)
-		UBETAbilityComponent* ActiveAbility;
->>>>>>> origin/master
 public:
 	ABETCharacter();
 	virtual void BeginPlay() override;
@@ -44,10 +38,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ABETWeapon> WeaponClass;
-<<<<<<< HEAD
 
 	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
-=======
+
 	UPROPERTY(EditAnywhere)
 		float Health;
 	UPROPERTY(EditAnywhere)
@@ -57,7 +50,6 @@ public:
 	UFUNCTION()
 		void ShieldPickup();
 
->>>>>>> origin/master
 protected:
 
 	void OnInteract();

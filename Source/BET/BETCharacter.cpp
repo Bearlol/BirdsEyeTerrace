@@ -42,11 +42,7 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-<<<<<<< HEAD
-
 	CurrentWeapon = NULL;
-=======
->>>>>>> origin/master
 }
 
 
@@ -258,4 +254,16 @@ void ABETCharacter::HealthPickup()
 void ABETCharacter::ShieldPickup()
 {
 	Shield = Shield + 0.25f;
+}
+
+void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
+{
+	if (PickedUpWeapon->GetWeaponClass())
+	{
+
+		ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
+		Weapon->AttachRootComponentToActor(this, TEXT("hand_r"));
+		//HandR will change depending on the name of the hand bone.
+		CurrentWeapon = Weapon;
+	}
 }

@@ -3,10 +3,10 @@
 #include "BET.h"
 #include "BETCharacter.h"
 #include "BETProjectile.h"
+#include "WeaponPickUp.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
 #include "BETProjectileWeapon.h"
-#include "WeaponPickUp.h"
 #include "BETWeapon.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
@@ -36,12 +36,11 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	ActiveAbility = CreateDefaultSubobject<UBETAbilityComponent>(TEXT("ActiveAbility"));
+
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
 	CurrentWeapon = NULL;
-
 }
 
 
@@ -113,12 +112,10 @@ void ABETCharacter::OnInteract()
 	}
 
 }
-// need to add 2 functions for isfiring, notfiring. when not firing need to set isattacking to false.
 
 void ABETCharacter::OnFire()
 { 
-	if (Weapon)
-	{
+	if (Weapon){
 		Weapon->Fire();
 	}
 

@@ -20,8 +20,8 @@ ABETWeapon::ABETWeapon(const FObjectInitializer& ObjectInitializer)
 void ABETWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+	
 }
-
 
 // Called every frame
 void ABETWeapon::Tick( float DeltaTime )

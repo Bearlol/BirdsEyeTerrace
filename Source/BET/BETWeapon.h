@@ -30,15 +30,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	class UAnimMontage* FireAnimation;
 
-	
-
 protected:
 	UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* WeaponMesh;
 
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Collider;
-	
+
 	UPROPERTY(EditDefaultsOnly)
 	float Damage;
 	UPROPERTY(EditDefaultsOnly)
@@ -49,4 +47,5 @@ protected:
 	float timeToNextAttack;
 
 	bool isAttacking = false; 
+	
 };

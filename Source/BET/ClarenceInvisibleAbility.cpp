@@ -7,7 +7,7 @@
 UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 	: Super()
 {
-	Owner = this->GetOwner();
+	
 }
 
 void UClarenceInvisibleAbility::TriggerBody(AActor* body)
@@ -19,10 +19,17 @@ void UClarenceInvisibleAbility::TriggerBody(AActor* body)
 
 void UClarenceInvisibleAbility::Use()
 {
-	
+	Owner = this->GetOwner();
 	TriggerBody(Owner);
 
 }
 
+
+void UClarenceInvisibleAbility::DeactivateAbility()
+{
+	bIsActive = false;
+	Owner->SetActorHiddenInGame(false);
+
+}
 
 

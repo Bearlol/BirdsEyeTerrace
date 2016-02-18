@@ -80,7 +80,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
 
 	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
-	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
+	InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
 void ABETCharacter::OnInteract()
@@ -119,22 +119,23 @@ void ABETCharacter::OnFire()
 { 
 	if (Weapon){
 		Weapon->Fire();
-	}
+		//}
 
-	// try and play the sound if specified
-	if (Weapon->FireSound != NULL)
-	{
-		UGameplayStatics::PlaySoundAtLocation(this, Weapon->FireSound, GetActorLocation());
-	}
-
-	// try and play a firing animation if specified
-	if (Weapon->FireAnimation != NULL)
-	{
-		// Get the animation object for the arms mesh
-		UAnimInstance* AnimInstance = Mesh1P->GetAnimInstance();
-		if (AnimInstance != NULL)
+		// try and play the sound if specified
+		if (Weapon->FireSound != NULL)
 		{
-			AnimInstance->Montage_Play(Weapon->FireAnimation, 1.f);
+			UGameplayStatics::PlaySoundAtLocation(this, Weapon->FireSound, GetActorLocation());
+		}
+
+		// try and play a firing animation if specified
+		if (Weapon->FireAnimation != NULL)
+		{
+			// Get the animation object for the arms mesh
+			UAnimInstance* AnimInstance = Mesh1P->GetAnimInstance();
+			if (AnimInstance != NULL)
+			{
+				AnimInstance->Montage_Play(Weapon->FireAnimation, 1.f);
+			}
 		}
 	}
 }

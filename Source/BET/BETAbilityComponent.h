@@ -23,19 +23,19 @@ public:
 
 	virtual bool CanUse() { return TimeToNextUse <= 0.f; }
 
-	void ActivateAbility()   { 
+	virtual void ActivateAbility()   { 
 		bIsActive = true;
 	}
-	void DeactivateAbility() { bIsActive = false; }
+	virtual void DeactivateAbility() { bIsActive = false; }
 
 protected:
 	virtual void Use();
-
+	bool bIsActive;
 private:
 	float TimeToNextUse;
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
-	bool bIsActive;
+
 		
 	
 };

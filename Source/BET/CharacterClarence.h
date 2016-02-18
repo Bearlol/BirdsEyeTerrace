@@ -16,6 +16,7 @@ class BET_API ACharacterClarence : public ABETCharacter
 		ACharacterClarence();
 		UPROPERTY(EditDefaultsOnly)
 		class UStaticMesh* clarenceMesh;
+
 		
 	
 };

@@ -19,4 +19,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 		AActor* Owner;
+
+	virtual void DeactivateAbility() override;
 };

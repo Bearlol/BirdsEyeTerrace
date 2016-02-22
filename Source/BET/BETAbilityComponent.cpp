@@ -44,4 +44,12 @@ void UBETAbilityComponent::Use()
 
 }
 
+bool UBETAbilityComponent::ServerActivateAbility_Validate()
+{
+	return true;
+}
 
+void UBETAbilityComponent::ServerActivateAbility_Implementation()
+{
+
+}

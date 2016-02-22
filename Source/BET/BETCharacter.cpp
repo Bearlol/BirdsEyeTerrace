@@ -3,11 +3,13 @@
 #include "BET.h"
 #include "BETCharacter.h"
 #include "BETProjectile.h"
+#include "unrealNetwork.h"
 #include "WeaponPickUp.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
 #include "BETProjectileWeapon.h"
 #include "BETWeapon.h"
+
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -266,5 +268,13 @@ void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
 		Weapon->AttachRootComponentToActor(this, TEXT("hand_r"));
 		//HandR will change depending on the name of the hand bone.
 		CurrentWeapon = Weapon;
+		PickedUpWeapon->Destroy();
+
 	}
+}
+
+void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(ABETCharacter, Health);
 }

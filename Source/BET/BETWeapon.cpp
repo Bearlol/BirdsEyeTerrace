@@ -43,3 +43,11 @@ void ABETWeapon::Fire()
 {
 
 }
+
+void ABETWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(ABETWeapon, Damage);
+	DOREPLIFETIME(ABETWeapon, AttackSpeed);
+	DOREPLIFETIME(ABETWeapon, Durability);
+}

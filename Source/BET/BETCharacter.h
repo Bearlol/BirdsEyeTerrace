@@ -40,18 +40,20 @@ public:
 		TSubclassOf<class ABETWeapon> WeaponClass;
 
 	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
-
-	UPROPERTY(EditAnywhere)
-		float Health;
-	UPROPERTY(EditAnywhere)
-		float Shield;
 	UFUNCTION()
 		void HealthPickup();
 	UFUNCTION()
 		void ShieldPickup();
 
+	
 protected:
+	UPROPERTY(EditAnywhere)
+		float Shield;
 
+	UPROPERTY(EditDefaultsOnly)
+		float maxHealth;
+	UPROPERTY(Replicated, Transient)
+		float Health;
 	void OnInteract();
 
 	class ABETWeapon *CurrentWeapon;

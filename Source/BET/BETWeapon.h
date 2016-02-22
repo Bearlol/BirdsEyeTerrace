@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "UnrealNetwork.h"
 #include "GameFramework/Actor.h"
 #include "BETWeapon.generated.h"
 
@@ -37,11 +38,11 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Collider;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Replicated, Transient)
 	float Damage;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Replicated, Transient)
 	float Durability;
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Replicated, Transient)
 	float AttackSpeed;
 
 	float timeToNextAttack;

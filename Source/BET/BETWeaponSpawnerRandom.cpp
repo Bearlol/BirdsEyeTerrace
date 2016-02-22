@@ -11,5 +11,6 @@ AWeaponPickUp* ABETWeaponSpawnerRandom::SpawnWeapon()
 		random = FMath::RandRange(0, weaponsList.Num() - 1);
 		return GetWorld()->SpawnActor<AWeaponPickUp>(weaponsList[random],
 		GetActorLocation(), FRotator::ZeroRotator);
+
 }
 

@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "UnrealNetwork.h"
 #include "Components/ActorComponent.h"
 #include "BETAbilityComponent.generated.h"
 
@@ -36,6 +37,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
 
-		
+	UFUNCTION(Server, Reliable, WithValidation)
+		virtual void ServerActivateAbility();
 	
 };

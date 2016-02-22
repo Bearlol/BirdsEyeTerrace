@@ -60,10 +60,10 @@ protected:
 	void OnFire();
 
 	/** Handles moving forward/backward */
-	void MoveForward(float Val);
+	virtual void MoveForward(float Val);
 
 	/** Handles stafing movement, left and right */
-	void MoveRight(float Val);
+	virtual void MoveRight(float Val);
 
 	/**
 	 * Called via input to turn at a given rate.

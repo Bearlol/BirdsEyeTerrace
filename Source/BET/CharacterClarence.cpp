@@ -15,3 +15,23 @@ ACharacterClarence::ACharacterClarence()
 }
 
 
+void ACharacterClarence::MoveForward(float Value)
+{
+	if (Value != 0.0f)
+	{
+		// add movement in that direction
+		AddMovementInput(GetActorForwardVector(), Value);
+		ActiveAbility->DeactivateAbility();
+	}
+}
+
+void ACharacterClarence::MoveRight(float Value)
+{
+	if (Value != 0.0f)
+	{
+		// add movement in that direction
+		AddMovementInput(GetActorRightVector(), Value);
+		ActiveAbility->DeactivateAbility();
+	}
+
+}

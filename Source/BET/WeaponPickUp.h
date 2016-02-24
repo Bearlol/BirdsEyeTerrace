@@ -18,7 +18,7 @@ class BET_API AWeaponPickUp : public APickUp
 
 public:
 	TSubclassOf<ABETWeapon>GetWeaponClass(){ return WeaponClass; }
-
+	
 protected:
 
 

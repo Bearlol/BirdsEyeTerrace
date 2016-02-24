@@ -2,6 +2,7 @@
 
 #include "BET.h"
 #include "WeaponPickUp.h"
+#include "BETWeaponSpawner.h"
 
 
 
@@ -12,5 +13,6 @@ void AWeaponPickUp::OnOverlap(AActor* OtherActor)
 	if (Character)
 	{
 		Character->PickUpWeapon(this);
+		Destroy();
 	}
 }

@@ -14,7 +14,7 @@ void UClarenceInvisibleAbility::TriggerBody(AActor* body)
 {
 
 	body->SetActorHiddenInGame(true);
-
+	body->SetActorEnableCollision(false);
 }
 
 void UClarenceInvisibleAbility::Use()
@@ -29,7 +29,7 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
-
+	Owner->SetActorEnableCollision(true);
 }
 
 

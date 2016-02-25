@@ -4,6 +4,7 @@
 
 #include "PickUp.h"
 #include "BETCharacter.h"
+
 #include "WeaponPickUp.generated.h"
 
 /**
@@ -20,7 +21,6 @@ public:
 	TSubclassOf<ABETWeapon>GetWeaponClass(){ return WeaponClass; }
 
 protected:
-
 
 	UPROPERTY(EditAnywhere, Category = PickUp)
 		TSubclassOf<ABETWeapon> WeaponClass;

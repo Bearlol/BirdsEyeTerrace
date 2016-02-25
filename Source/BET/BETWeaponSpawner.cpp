@@ -10,6 +10,7 @@ ABETWeaponSpawner::ABETWeaponSpawner()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	TimeToRespawn = MaxRespawnTime;
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +24,7 @@ void ABETWeaponSpawner::BeginPlay()
 void ABETWeaponSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Role == ROLE_Authority) 
+	if (Role == ROLE_Authority)
 	{
 		if (SpawnedWeapon == NULL)
 		{
@@ -34,11 +35,15 @@ void ABETWeaponSpawner::Tick(float DeltaTime)
 			}
 		}
 	}
-
 }
 
 AWeaponPickUp* ABETWeaponSpawner::SpawnWeapon()
 {
 	TimeToRespawn = MaxRespawnTime;
 	return NULL;
+}
+
+void ABETWeaponSpawner::WeaponPickedUp()
+{
+	SpawnedWeapon = NULL;
 }

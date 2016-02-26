@@ -19,6 +19,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 		AActor* Owner;
-
+	UPROPERTY(EditDefaultsOnly)
+		float duration;
+	UPROPERTY(EditDefaultsOnly)
+		float maxDuration;
 	virtual void DeactivateAbility() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };

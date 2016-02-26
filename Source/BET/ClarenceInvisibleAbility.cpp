@@ -7,7 +7,8 @@
 UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 	: Super()
 {
-	
+	maxDuration = 10.f;
+	duration = 10.f;
 }
 
 void UClarenceInvisibleAbility::TriggerBody(AActor* body)
@@ -29,7 +30,26 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
-
+	duration = maxDuration;
 }
 
+void UClarenceInvisibleAbility::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (bIsActive) {
+		duration -= DeltaTime;
+		if (duration <= 0.f) {
+			DeactivateAbility();
+			duration = maxDuration;
+		}
+	}
+	// ...
+	/*
+	TimeToNextUse -= DeltaTime;
+	if (bIsActive)
+	{
+		Use();
+	}
+	*/
+}
 

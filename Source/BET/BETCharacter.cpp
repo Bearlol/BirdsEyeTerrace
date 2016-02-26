@@ -267,7 +267,9 @@ void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
 		ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
 		Weapon->AttachRootComponentToActor(this, TEXT("hand_r"));
 		//HandR will change depending on the name of the hand bone.
-	//	CurrentWeapon = NULL;
+		if (CurrentWeapon) {
+			CurrentWeapon->Destroy();
+		}
 		CurrentWeapon = Weapon;
 	//	PickedUpWeapon = NULL;
 

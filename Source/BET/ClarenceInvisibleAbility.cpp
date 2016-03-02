@@ -2,6 +2,7 @@
 
 #include "BET.h"
 #include "ClarenceInvisibleAbility.h"
+#include "CharacterClarence.h"
 
 
 UClarenceInvisibleAbility::UClarenceInvisibleAbility()
@@ -9,19 +10,21 @@ UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 {
 	maxDuration = 10.f;
 	duration = 10.f;
+	Owner = Cast<ABETCharacter>(this->GetOwner());
 }
 
-void UClarenceInvisibleAbility::TriggerBody(AActor* body)
+void UClarenceInvisibleAbility::TriggerBody()
 {
-
-	body->SetActorHiddenInGame(true);
-
+	if (bIsActive == true) {
+		Owner->SetActorHiddenInGame(true);
+		Owner->GetWeapon()->SetActorHiddenInGame(true);
+	}
 }
 
 void UClarenceInvisibleAbility::Use()
 {
-	Owner = this->GetOwner();
-	TriggerBody(Owner);
+	
+	TriggerBody();
 
 }
 
@@ -30,6 +33,7 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
+	Owner->GetWeapon()->SetActorHiddenInGame(false);
 	duration = maxDuration;
 }
 

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETAbilityComponent.h"
+#include "BETCharacter.h"
 #include "ClarenceInvisibleAbility.generated.h"
 
 /**
@@ -14,11 +15,9 @@ class BET_API UClarenceInvisibleAbility : public UBETAbilityComponent
 	GENERATED_BODY()
 		UClarenceInvisibleAbility();
 protected:
-	void TriggerBody(AActor* body);
+	void TriggerBody();
 	virtual void Use() override;
-
-	UPROPERTY(EditDefaultsOnly)
-		AActor* Owner;
+	ABETCharacter* Owner;
 	UPROPERTY(EditDefaultsOnly)
 		float duration;
 	UPROPERTY(EditDefaultsOnly)

@@ -28,10 +28,10 @@ public:
 		bIsActive = true;
 	}
 	virtual void DeactivateAbility() { bIsActive = false; }
-
+	bool bIsActive;
 protected:
 	virtual void Use();
-	bool bIsActive;
+	
 private:
 	float TimeToNextUse;
 	UPROPERTY(EditDefaultsOnly)

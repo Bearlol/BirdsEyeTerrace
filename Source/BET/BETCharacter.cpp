@@ -281,3 +281,8 @@ void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLif
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(ABETCharacter, Health);
 }
+
+ABETWeapon* ABETCharacter::GetWeapon()
+{
+	return CurrentWeapon;
+}

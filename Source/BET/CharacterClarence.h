@@ -17,7 +17,11 @@ class BET_API ACharacterClarence : public ABETCharacter
 		UPROPERTY(EditDefaultsOnly)
 		class UStaticMesh* clarenceMesh;
 
+
+
 protected:
 	virtual void MoveForward(float Val) override;
 	virtual void MoveRight(float Val) override;
+
+
 };

@@ -56,9 +56,10 @@ protected:
 	UPROPERTY(Replicated, Transient)
 		float Health;
 	void OnInteract();
-
-	class ABETWeapon *CurrentWeapon;
-	class ABETWeapon* Weapon;
+	UPROPERTY(Replicated, Transient)
+		class ABETWeapon *CurrentWeapon;
+	UPROPERTY(Replicated, Transient)
+		class ABETWeapon *Weapon;
 	/** Fires a projectile. */
 	void OnFire();
 

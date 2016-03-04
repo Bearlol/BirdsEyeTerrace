@@ -12,19 +12,26 @@ UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 	duration = 10.f;
 	Owner = Cast<ABETCharacter>(this->GetOwner());
 }
-
+/*
 void UClarenceInvisibleAbility::TriggerBody()
 {
 	if (bIsActive == true) {
+
 		Owner->SetActorHiddenInGame(true);
-		Owner->GetWeapon()->SetActorHiddenInGame(true);
+		if(Owner->GetWeapon())
+			Owner->GetWeapon()->SetActorHiddenInGame(true);
 	}
-}
+}*/
 
 void UClarenceInvisibleAbility::Use()
 {
 	
-	TriggerBody();
+	if (bIsActive == true) {
+
+		Owner->SetActorHiddenInGame(true);
+		if (Owner->GetWeapon())
+			Owner->GetWeapon()->SetActorHiddenInGame(true);
+	}
 
 }
 
@@ -33,6 +40,7 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
+	if(Owner->GetWeapon())
 	Owner->GetWeapon()->SetActorHiddenInGame(false);
 	duration = maxDuration;
 }
@@ -47,13 +55,6 @@ void UClarenceInvisibleAbility::TickComponent(float DeltaTime, ELevelTick TickTy
 			duration = maxDuration;
 		}
 	}
-	// ...
-	/*
-	TimeToNextUse -= DeltaTime;
-	if (bIsActive)
-	{
-		Use();
-	}
-	*/
+
 }
 

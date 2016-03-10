@@ -31,6 +31,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	class UAnimMontage* FireAnimation;
 
+
+
+
+
+
 protected:
 	UPROPERTY(VisibleAnywhere)
 		UStaticMeshComponent* WeaponMesh;

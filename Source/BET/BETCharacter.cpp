@@ -41,6 +41,7 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
+	Health = maxHealth;
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -288,4 +289,25 @@ void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLif
 ABETWeapon* ABETCharacter::GetWeapon()
 {
 	return CurrentWeapon;
+}
+
+
+float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
+{
+
+
+	if (Role == ROLE_Authority)
+	{
+		float actualDamage = Super::TakeDamage(TakeDamage, DamageEvent, EventInstigator, DamageCauser);
+		Health -= actualDamage;
+	}
+
+	return 0.f;
+
+
+	//uncomment for death!!!!
+	//if (Health <= 0)
+	//{
+		//Destroy;
+	//}
 }

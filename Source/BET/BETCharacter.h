@@ -46,13 +46,18 @@ public:
 	UFUNCTION()
 		void ShieldPickup();
 
+	virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
+	
+
+
 	
 protected:
+
 	UPROPERTY(EditAnywhere)
 		float Shield;
 
 	UPROPERTY(EditDefaultsOnly)
-		float maxHealth;
+		float maxHealth = 10;
 	UPROPERTY(Replicated, Transient)
 		float Health;
 	void OnInteract();

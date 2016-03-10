@@ -51,3 +51,4 @@ void ABETWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifeti
 	DOREPLIFETIME(ABETWeapon, AttackSpeed);
 	DOREPLIFETIME(ABETWeapon, Durability);
 }
+

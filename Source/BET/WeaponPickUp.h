@@ -16,7 +16,7 @@ UCLASS()
 class BET_API AWeaponPickUp : public APickUp
 {
 	GENERATED_BODY()
-
+		AWeaponPickUp();
 public:
 	TSubclassOf<ABETWeapon>GetWeaponClass(){ return WeaponClass; }
 

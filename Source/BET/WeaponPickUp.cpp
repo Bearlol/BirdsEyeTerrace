@@ -4,7 +4,11 @@
 #include "BETWeaponSpawner.h"
 #include "WeaponPickUp.h"
 
+AWeaponPickUp::AWeaponPickUp()
+	:Super() 
+{
 
+}
 
 void AWeaponPickUp::OnOverlap(AActor* OtherActor)
 {

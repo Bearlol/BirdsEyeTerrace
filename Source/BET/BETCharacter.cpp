@@ -46,6 +46,7 @@ ABETCharacter::ABETCharacter()
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	CurrentWeapon = NULL;
+	bReplicates = true;
 }
 
 
@@ -260,7 +261,7 @@ void ABETCharacter::ShieldPickup()
 	Shield = Shield + 0.25f;
 }
 
-void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
+void ABETCharacter::PickUpWeapon_Implementation(class AWeaponPickUp * PickedUpWeapon)
 {
 
 		if (PickedUpWeapon->GetWeaponClass())
@@ -270,7 +271,7 @@ void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
 			Weapon->AttachRootComponentTo(Mesh, TEXT("BN_R_Wrist01"), EAttachLocation::SnapToTarget);
 			//HandR will change depending on the name of the hand bone.
 			if (CurrentWeapon) {
-				CurrentWeapon->Destroy();
+				CurrentWeapon ->Destroy();
 			}
 			CurrentWeapon = Weapon;
 			//	PickedUpWeapon = NULL;
@@ -282,8 +283,8 @@ void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLif
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(ABETCharacter, Health);
-	DOREPLIFETIME(ABETCharacter, CurrentWeapon);
-	DOREPLIFETIME(ABETCharacter, Weapon);
+//	DOREPLIFETIME(ABETCharacter, Weapon);
+//	DOREPLIFETIME(ABETCharacter, Weapon);
 }
 
 ABETWeapon* ABETCharacter::GetWeapon()

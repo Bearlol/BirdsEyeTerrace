@@ -40,6 +40,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ABETWeapon> WeaponClass;
 
+	UFUNCTION(Client, Reliable)
 	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
 	UFUNCTION()
 		void HealthPickup();
@@ -61,10 +62,11 @@ protected:
 	UPROPERTY(Replicated, Transient)
 		float Health;
 	void OnInteract();
-	UPROPERTY(Replicated, Transient)
-		class ABETWeapon *CurrentWeapon;
-	UPROPERTY(Replicated, Transient)
-		class ABETWeapon *Weapon;
+
+
+	class ABETWeapon *CurrentWeapon;
+//	UPROPERTY(Replicated, Transient)
+	class ABETWeapon *Weapon;
 	/** Fires a projectile. */
 	void OnFire();
 

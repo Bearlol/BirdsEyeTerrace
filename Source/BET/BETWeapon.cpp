@@ -14,6 +14,7 @@ ABETWeapon::ABETWeapon(const FObjectInitializer& ObjectInitializer)
 	RootComponent = Collider;
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 	WeaponMesh->AttachTo(RootComponent);
+	bReplicates = true;
 }
 
 // Called when the game starts or when spawned

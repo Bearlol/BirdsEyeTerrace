@@ -23,5 +23,7 @@ void AEffectOverTime::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+
+
 }
 

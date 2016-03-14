@@ -262,21 +262,26 @@ void ABETCharacter::ShieldPickup()
 }
 
 void ABETCharacter::PickUpWeapon_Implementation(class AWeaponPickUp * PickedUpWeapon)
-{
-
+{	
 		if (PickedUpWeapon->GetWeaponClass())
 		{
 
 			ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
-			Weapon->AttachRootComponentTo(Mesh, TEXT("BN_R_Wrist01"), EAttachLocation::SnapToTarget);
+			Weapon->AttachRootComponentTo(GetMesh(), TEXT("BN_R_Wrist01"), EAttachLocation::SnapToTarget);
 			//HandR will change depending on the name of the hand bone.
 			if (CurrentWeapon) {
-				CurrentWeapon ->Destroy();
+				CurrentWeapon->Destroy();
 			}
 			CurrentWeapon = Weapon;
 			//	PickedUpWeapon = NULL;
-		}
-	
+		}			
+}
+
+bool ABETCharacter::PickUpWeapon_Validate(class AWeaponPickUp * PickedUpWeapon)
+{
+
+	return true;
+
 }
 
 void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const

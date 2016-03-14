@@ -40,7 +40,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ABETWeapon> WeaponClass;
 
-	UFUNCTION(Client, Reliable)
+	UFUNCTION(Server, Reliable, WithValidation)
 	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
 	UFUNCTION()
 		void HealthPickup();

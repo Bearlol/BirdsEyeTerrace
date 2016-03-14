@@ -9,6 +9,7 @@ AEffectOverTime::AEffectOverTime()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	duration = 5.f;
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +24,10 @@ void AEffectOverTime::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
+	duration -= DeltaTime;
 
-
+	if (duration <= 0){
+		Destroy();
+	}
 }
 

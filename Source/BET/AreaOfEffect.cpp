@@ -21,15 +21,18 @@ void UAreaOfEffect::Use()
 	TArray<FOverlapResult> Overlaps;
 
 	GetWorld()->OverlapMultiByObjectType(Overlaps, GetOwner()->GetActorLocation(), FQuat::Identity, QueryParams, FCollisionShape::MakeSphere(500.f), SphereParams);
-	DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0));
+
 	for (int32 i = 0; i < Overlaps.Num(); ++i)
 	{ 
+		//
+		
 		FOverlapResult const& Overlap = Overlaps[i];
 		ABETCharacter* Mine = Cast<ABETCharacter>(Overlap.GetActor());
 		
 		
 		if (Mine != nullptr)
 		{
+			DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
 		}
 	}
 }

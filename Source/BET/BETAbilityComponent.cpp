@@ -11,7 +11,7 @@ UBETAbilityComponent::UBETAbilityComponent()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-
+	TimeToNextUse = 0.f;
 	// ...
 }
 
@@ -33,15 +33,19 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 	// ...
 
 	TimeToNextUse -= DeltaTime;
-	if (bIsActive)
+	if (CanUse())
 	{
-		Use();
+		if (bIsActive)
+		{
+			Use();
+		}
 	}
 }
 
 void UBETAbilityComponent::Use()
 {
-
+	
+	TimeToNextUse = Cooldown;
 }
 
 bool UBETAbilityComponent::ServerActivateAbility_Validate()

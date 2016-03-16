@@ -31,12 +31,12 @@ public:
 	bool bIsActive;
 protected:
 	virtual void Use();
-	
-private:
-	float TimeToNextUse;
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
 
+private:
+	float TimeToNextUse;
+	
 	UFUNCTION(Server, Reliable, WithValidation)
 		virtual void ServerActivateAbility();
 	

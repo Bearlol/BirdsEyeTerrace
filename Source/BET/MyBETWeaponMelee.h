@@ -30,6 +30,4 @@ public:
 	UFUNCTION()
 		void OnHit(AActor*OtherActor);
 
-	UPROPERTY(EditAnywhere)
-		float BaseDamage;
 };

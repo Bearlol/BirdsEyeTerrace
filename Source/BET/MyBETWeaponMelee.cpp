@@ -13,11 +13,8 @@ AMyBETWeaponMelee::AMyBETWeaponMelee(const FObjectInitializer &ObjectInitializer
 	CollisionComp -> InitCapsuleSize(5.0f,2.5f);
 	CollisionComp-> BodyInstance.SetCollisionProfileName("Melee");
 
-	RootComponent = CollisionComp;
+	//RootComponent = CollisionComp;
 
-	BaseDamage = 5.0f;
-
-	
 }
 
 
@@ -28,7 +25,7 @@ void AMyBETWeaponMelee::OnHit(AActor*OtherActor)
 {
 	if (OtherActor != NULL && (OtherActor != this))
 	{
-		UGameplayStatics::ApplyDamage(OtherActor, BaseDamage, NULL, this, UDamageType::StaticClass());
+		UGameplayStatics::ApplyDamage(OtherActor, Damage, NULL, this, UDamageType::StaticClass());
 		
 	}
 		

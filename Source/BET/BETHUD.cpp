@@ -17,6 +17,9 @@ ABETHUD::ABETHUD()
 
 	static ConstructorHelpers::FObjectFinder<UBlueprint> MyWidgetAsset(TEXT("/Game/TestWidget"));
 	TestWidgetClass = Cast<UClass>(MyWidgetAsset.Object->GeneratedClass);
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
+	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
 }
 
 int32 health = 200;
@@ -26,6 +29,8 @@ void ABETHUD::BeginPlay()
 	Super::BeginPlay();
 	TestWidget = CreateWidget<UTestWidget>(GetOwningPlayerController(), TestWidgetClass);
 	TestWidget->AddToViewport();
+	MiniMapWidget = CreateWidget<UMiniMapWidget>(GetOwningPlayerController(), MiniMapWidgetClass);
+	MiniMapWidget->AddToViewport();
 }
 
 void ABETHUD::DrawHUD()
@@ -33,6 +38,7 @@ void ABETHUD::DrawHUD()
 	Super::DrawHUD();
 
 	drawHealthBar();
+	drawMiniMap();
 	// find center of the Canvas
 	const FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
 
@@ -52,3 +58,10 @@ void ABETHUD::drawHealthBar()
 		Canvas->DrawIcon(HealthBarIcon, (Canvas->SizeX)/2.5, 20, 0.0f);
 }
 
+
+//minimap for kim
+void ABETHUD::drawMiniMap()
+{
+	FCanvasIcon MiniMapIcon = UCanvas::MakeIcon(miniMapTexture, 0, 0, health, 20);
+	Canvas->DrawIcon(MiniMapIcon, (Canvas->SizeX) / 2.5, 20, 0.0f);
+}

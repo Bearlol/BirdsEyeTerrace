@@ -2,6 +2,7 @@
 #pragma once 
 #include "GameFramework/HUD.h"
 #include "TestWidget.h"
+#include "MiniMapWidget.h"
 #include "BETHUD.generated.h"
 
 UCLASS()
@@ -16,13 +17,17 @@ public:
 	virtual void DrawHUD() override;
 	virtual void BeginPlay() override;
 	void drawHealthBar();
+	void drawMiniMap();
 	UTexture2D* healthBarTexture;
+	UTexture2D* miniMapTexture;
 
 private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
 	TSubclassOf<UTestWidget> TestWidgetClass;
 	UTestWidget* TestWidget;
+	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
+	UMiniMapWidget* MiniMapWidget;
 
 	
 

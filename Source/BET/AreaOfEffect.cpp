@@ -7,6 +7,7 @@
 
 
 
+
 UAreaOfEffect::UAreaOfEffect()
 :Super()
 {
@@ -32,7 +33,13 @@ void UAreaOfEffect::Use()
 		
 		if (Mine != nullptr)
 		{
+			if (debuff){
+				debuff->SetActive();
+				debuff->AttachRootComponentToActor(Mine);
+				
+			}
 			//This is where you will attach an effect over time...
+
 			DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
 		}
 	}

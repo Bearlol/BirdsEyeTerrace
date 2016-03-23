@@ -9,13 +9,16 @@ UAbilityMap::UAbilityMap()
 {
 
 	Owner = Cast<ABETCharacter>(this->GetOwner());
-
+	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
+	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
 }
 
 void UAbilityMap::Use()
 
 {
 	Super::Use();
+	MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(Owner->GetController()), MiniMapWidgetClass);
+	MiniMapWidget->AddToViewport();
 }
 
 

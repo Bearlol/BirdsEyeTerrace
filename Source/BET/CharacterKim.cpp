@@ -9,6 +9,17 @@ ACharacterKim::ACharacterKim()
 {
 
 	ActiveAbility = CreateDefaultSubobject<UAbilityMap>(TEXT("ActiveAbility"));
+
+//	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
+//	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
+}
+
+void ACharacterKim::OnRep_Controller()
+{
+	Super::OnRep_Controller();
+
+//	MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(GetController()), MiniMapWidgetClass);
+//	MiniMapWidget->AddToViewport();
 }
 
 void ACharacterKim::MoveForward(float Value)

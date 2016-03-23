@@ -18,8 +18,8 @@ ABETHUD::ABETHUD()
 	static ConstructorHelpers::FObjectFinder<UBlueprint> MyWidgetAsset(TEXT("/Game/TestWidget"));
 	TestWidgetClass = Cast<UClass>(MyWidgetAsset.Object->GeneratedClass);
 
-	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
-	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
+//	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
+//	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
 }
 
 int32 health = 200;
@@ -29,8 +29,8 @@ void ABETHUD::BeginPlay()
 	Super::BeginPlay();
 	TestWidget = CreateWidget<UTestWidget>(GetOwningPlayerController(), TestWidgetClass);
 	TestWidget->AddToViewport();
-	MiniMapWidget = CreateWidget<UMiniMapWidget>(GetOwningPlayerController(), MiniMapWidgetClass);
-	MiniMapWidget->AddToViewport();
+//	MiniMapWidget = CreateWidget<UMiniMapWidget>(GetOwningPlayerController(), MiniMapWidgetClass);
+//	MiniMapWidget->AddToViewport();
 }
 
 void ABETHUD::DrawHUD()

@@ -4,6 +4,7 @@
 
 #include "BETAbilityComponent.h"
 #include "BETCharacter.h"
+#include "MiniMapWidget.h"
 #include "AbilityMap.generated.h"
 
 /**
@@ -21,6 +22,8 @@ protected:
 	virtual void DeactivateAbility() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	
+private:
+	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
+	UMiniMapWidget* MiniMapWidget;
 	
 };

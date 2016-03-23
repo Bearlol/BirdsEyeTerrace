@@ -26,8 +26,8 @@ private:
 	class UTexture2D* CrosshairTex;
 	TSubclassOf<UTestWidget> TestWidgetClass;
 	UTestWidget* TestWidget;
-	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
-	UMiniMapWidget* MiniMapWidget;
+//	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
+//	UMiniMapWidget* MiniMapWidget;
 
 	
 

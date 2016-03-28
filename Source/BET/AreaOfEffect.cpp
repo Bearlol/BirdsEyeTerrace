@@ -11,11 +11,12 @@
 UAreaOfEffect::UAreaOfEffect()
 :Super()
 {
-
+	//debuff = CreateDefaultSubobject<AEffectOverTime>(TEXT("debuffApplied"));
 }
 
 void UAreaOfEffect::Use()
 {
+	Super::Use();
 	static FName NAME_TestMove = FName(TEXT("TestMove"));
 	FCollisionQueryParams SphereParams(NAME_TestMove, false, GetOwner());
 	FCollisionObjectQueryParams QueryParams = FCollisionObjectQueryParams(FCollisionObjectQueryParams::InitType::AllDynamicObjects);
@@ -30,17 +31,18 @@ void UAreaOfEffect::Use()
 		FOverlapResult const& Overlap = Overlaps[i];
 		ABETCharacter* Mine = Cast<ABETCharacter>(Overlap.GetActor());
 		
-		
+		AEffectOverTime* appliedDebuff;
 		if (Mine != nullptr)
 		{
+			appliedDebuff = debuff;
 			if (debuff){
-				debuff->SetActive();
-				debuff->AttachRootComponentToActor(Mine);
-				
+				appliedDebuff->SetActive();
+				appliedDebuff->AttachRootComponentToActor(Mine);		
+				DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
 			}
 			//This is where you will attach an effect over time...
 
-			DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
+
 		}
 	}
 }

@@ -31,7 +31,6 @@ void ACharacterKim::MoveForward(float Value)
 		if (ActiveAbility->bIsActive == true) {
 			ActiveAbility->DeactivateAbility();
 		}
-
 	}
 }
 

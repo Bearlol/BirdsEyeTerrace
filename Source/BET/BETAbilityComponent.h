@@ -33,9 +33,9 @@ protected:
 	virtual void Use();
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
-
+	float TimeToNextUse;	
 private:
-	float TimeToNextUse;
+	
 	
 	UFUNCTION(Server, Reliable, WithValidation)
 		virtual void ServerActivateAbility();

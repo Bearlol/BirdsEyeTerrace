@@ -11,6 +11,8 @@ UAbilityMap::UAbilityMap()
 	Owner = Cast<ABETCharacter>(this->GetOwner());
 	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
 	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
+	Cooldown = 500000.f;
+	
 }
 
 void UAbilityMap::Use()
@@ -25,11 +27,14 @@ void UAbilityMap::Use()
 void UAbilityMap::DeactivateAbility()
 {
 	Super::DeactivateAbility();
+	TimeToNextUse = 0.f;
+	MiniMapWidget->RemoveFromViewport();
+	
 }
 
 void UAbilityMap::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 

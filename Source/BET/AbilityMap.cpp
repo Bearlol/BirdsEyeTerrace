@@ -24,7 +24,7 @@ void UAbilityMap::Use()
 
 void UAbilityMap::DeactivateAbility()
 {
-
+	Super::DeactivateAbility();
 }
 
 void UAbilityMap::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

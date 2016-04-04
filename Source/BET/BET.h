@@ -4,6 +4,7 @@
 #define __BET_H__
 
 #include "EngineMinimal.h"
+#include "SlateBasics.h"
 
 
 #endif

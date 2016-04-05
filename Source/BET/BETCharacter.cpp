@@ -267,8 +267,8 @@ void ABETCharacter::PickUpWeapon_Implementation(class AWeaponPickUp * PickedUpWe
 		{
 
 			ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
-			Weapon->AttachRootComponentTo(GetMesh(), TEXT("BN_R_Wrist01"), EAttachLocation::SnapToTarget);
-			//HandR will change depending on the name of the hand bone.
+			Weapon->AttachRootComponentTo(GetMesh(), TEXT("BN_R_Weapon01"), EAttachLocation::SnapToTarget);
+			//BN_R_Weapon01 will change depending on the name of the hand bone.
 			if (CurrentWeapon) {
 				CurrentWeapon->Destroy();
 			}

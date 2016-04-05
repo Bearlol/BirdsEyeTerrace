@@ -23,7 +23,7 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	virtual bool CanUse() { return TimeToNextUse <= 0.f; }
-
+	void SetTime();
 	virtual void ActivateAbility()   { 
 		bIsActive = true;
 	}

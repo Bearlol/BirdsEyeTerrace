@@ -2,7 +2,11 @@
 	"TargetName" : "BETEditor",
 	"Platform" : "Win64",
 	"Configuration" : "Development",
+<<<<<<< HEAD
 	"BuildId" : "2ce3241d-197f-4705-81b6-c63ab061d532",
+=======
+	"BuildId" : "a2ff6773-e196-443f-8198-1360f001377a",
+>>>>>>> origin/master
 	"Version" : 
 	{
 		"MajorVersion" : 4,

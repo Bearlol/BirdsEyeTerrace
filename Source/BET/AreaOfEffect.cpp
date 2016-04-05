@@ -25,24 +25,27 @@ void UAreaOfEffect::Use()
 	GetWorld()->OverlapMultiByObjectType(Overlaps, GetOwner()->GetActorLocation(), FQuat::Identity, QueryParams, FCollisionShape::MakeSphere(500.f), SphereParams);
 
 	for (int32 i = 0; i < Overlaps.Num(); ++i)
-	{ 
+	{
 		//
-		
+
 		FOverlapResult const& Overlap = Overlaps[i];
 		ABETCharacter* Mine = Cast<ABETCharacter>(Overlap.GetActor());
-		
-		AEffectOverTime* appliedDebuff;
+
+		//	AEffectOverTime* appliedDebuff;
 		if (Mine != nullptr)
 		{
-			appliedDebuff = debuff;
-			if (debuff){
-				appliedDebuff->SetActive();
-				appliedDebuff->AttachRootComponentToActor(Mine);		
-				DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
-			}
-			//This is where you will attach an effect over time...
+			//appliedDebuff = debuff;
+//			if (debuff){
 
+			Mine->SetBlocked();
 
+			//Mine->Destroy();
+			//					appliedDebuff->SetActive();
+//					appliedDebuff->AttachRootComponentToActor(Mine);		
+//					DrawDebugSphere(GetWorld(), GetOwner()->GetActorLocation(), 24, 32, FColor(255, 0, 0), false, -1.f);
+//			}
+			//This is where you will attach an effect over time...			
 		}
 	}
+	Overlaps.Empty();
 }

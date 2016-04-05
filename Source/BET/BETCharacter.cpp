@@ -47,6 +47,8 @@ ABETCharacter::ABETCharacter()
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	CurrentWeapon = NULL;
 	bReplicates = true;
+	stunned = false;
+	blocked = false;
 }
 
 
@@ -72,9 +74,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
 	
 	InputComponent->BindAction("Interact", IE_Pressed, this, &ABETCharacter::OnInteract);
-	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
-	
+
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
@@ -82,8 +82,10 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("TurnRate", this, &ABETCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
-
-	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
+		InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
+		InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
+		InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
+	
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
@@ -297,6 +299,15 @@ ABETWeapon* ABETCharacter::GetWeapon()
 	return CurrentWeapon;
 }
 
+void ABETCharacter::SetStunned()
+{
+	stunned = true;
+}
+
+void ABETCharacter::SetBlocked()
+{
+	ActiveAbility->SetTime();
+}
 
 float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
 {
@@ -312,8 +323,8 @@ float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & Da
 
 
 	//uncomment for death!!!!
-	//if (Health <= 0)
-	//{
-		//Destroy;
-	//}
+	if (Health <= 0)
+	{
+		Destroy();
+	}
 }

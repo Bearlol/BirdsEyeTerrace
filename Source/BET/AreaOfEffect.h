@@ -16,9 +16,8 @@ class BET_API UAreaOfEffect : public UBETAbilityComponent
 
 		UAreaOfEffect();
 public:
-	UPROPERTY(EditDefaultsOnly)
-	AEffectOverTime* debuff;
+	
 protected:
 	virtual void Use() override;
-	AEffectOverTime* appliedDebuff;
+	
 };

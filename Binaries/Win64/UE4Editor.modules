@@ -1,10 +1,6 @@
 {
 	"Changelist" : 2927265,
-<<<<<<< HEAD
-	"BuildId" : "2ce3241d-197f-4705-81b6-c63ab061d532",
-=======
-	"BuildId" : "a2ff6773-e196-443f-8198-1360f001377a",
->>>>>>> origin/master
+	"BuildId" : "571f175c-b76f-47fb-a73e-bcf00d60a225",
 	"Modules" : 
 	{
 		"BET" : "UE4Editor-BET.dll"

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "BETCharacter.h"
-#include "AreaOfEffect.h"
+#include "AbilityBlockAbilities.h"
 #include "CharacterDennis.generated.h"
 
 /**

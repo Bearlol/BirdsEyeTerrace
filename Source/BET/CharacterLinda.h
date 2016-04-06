@@ -12,7 +12,7 @@ UCLASS()
 class BET_API ACharacterLinda : public ABETCharacter
 {
 	GENERATED_BODY()
-	
+		ACharacterLinda();
 	
 	
 	

@@ -9,5 +9,5 @@ ACharacterDennis::ACharacterDennis()
 	:Super()
 
 {
-	ActiveAbility = CreateDefaultSubobject<UAreaOfEffect>(TEXT("ActiveAbility"));
+	ActiveAbility = CreateDefaultSubobject<UAbilityBlockAbilities>(TEXT("ActiveAbility"));
 }

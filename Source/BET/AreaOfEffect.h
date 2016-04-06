@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETAbilityComponent.h"
+#include "BETCharacter.h"
 #include "EffectOverTime.h"
 #include "AreaOfEffect.generated.h"
 
@@ -14,10 +15,10 @@ class BET_API UAreaOfEffect : public UBETAbilityComponent
 {
 	GENERATED_BODY()
 
-		UAreaOfEffect();
 public:
-	
+	UAreaOfEffect();
 protected:
 	virtual void Use() override;
+	virtual void UsedFunction(ABETCharacter* character);
 	
 };

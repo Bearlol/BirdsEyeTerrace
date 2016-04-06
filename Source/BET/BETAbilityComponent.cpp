@@ -32,9 +32,9 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 	// ...
 	TimeToNextUse -= DeltaTime;
-	if (CanUse())
+	if (bIsActive)
 	{
-		if (bIsActive)
+		if (CanUse() == true)
 		{
 				Use();
 		}
@@ -46,6 +46,7 @@ void UBETAbilityComponent::Use()
 	
 	TimeToNextUse = Cooldown;
 }
+
 
 bool UBETAbilityComponent::ServerActivateAbility_Validate()
 {
@@ -59,9 +60,10 @@ void UBETAbilityComponent::ServerActivateAbility_Implementation()
 
 void UBETAbilityComponent::SetTime()
 {
-	if (TimeToNextUse <= 0.f)
+	if (this->TimeToNextUse <= 0.f)
 	{
-		TimeToNextUse = 0.f;
+		this->TimeToNextUse = 0.f;
 	}
-	TimeToNextUse +=25.f;
+	this->TimeToNextUse = this->Cooldown;
+	//this->TimeToNextUse +=25.f;
 }

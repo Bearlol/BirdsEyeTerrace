@@ -12,8 +12,8 @@ UCLASS()
 class BET_API ACharacterSam : public ABETCharacter
 {
 	GENERATED_BODY()
-	
-	
+
+		ACharacterSam();
 	
 	
 };

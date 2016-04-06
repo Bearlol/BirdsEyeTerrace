@@ -2,7 +2,6 @@
 
 #include "BET.h"
 #include "AreaOfEffect.h"
-#include "BETCharacter.h"
 #include "Engine.h"
 
 
@@ -37,7 +36,7 @@ void UAreaOfEffect::Use()
 			//appliedDebuff = debuff;
 //			if (debuff){
 
-			Mine->SetBlocked();
+			UsedFunction(Mine);
 
 			//Mine->Destroy();
 			//					appliedDebuff->SetActive();
@@ -48,4 +47,9 @@ void UAreaOfEffect::Use()
 		}
 	}
 	Overlaps.Empty();
+	DeactivateAbility();
+}
+
+void UAreaOfEffect::UsedFunction(ABETCharacter* character)
+{
 }

@@ -35,9 +35,7 @@ void UAreaOfEffect::Use()
 		{
 			//appliedDebuff = debuff;
 //			if (debuff){
-
 			UsedFunction(Mine);
-
 			//Mine->Destroy();
 			//					appliedDebuff->SetActive();
 //					appliedDebuff->AttachRootComponentToActor(Mine);		

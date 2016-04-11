@@ -23,21 +23,28 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	virtual bool CanUse() { return TimeToNextUse <= 0.f; }
-	void SetTime();
+
 	virtual void ActivateAbility()   { 
 		bIsActive = true;
+
 	}
 	virtual void DeactivateAbility() { bIsActive = false; }
 	bool bIsActive;
+	UFUNCTION(Server, Reliable, WithValidation)
+		virtual void ServerActivateAbility();
+
+	UFUNCTION()
+		void SetTime();
 protected:
 	virtual void Use();
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
+	UPROPERTY(Replicated, Transient)
 	float TimeToNextUse;	
-private:
-	
-	
-	UFUNCTION(Server, Reliable, WithValidation)
-		virtual void ServerActivateAbility();
+	float blockedDuration = 0.f;
+	bool blocked = false;
+
+
+
 	
 };

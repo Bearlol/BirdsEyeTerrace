@@ -31,12 +31,23 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 	// ...
-	TimeToNextUse -= DeltaTime;
-	if (bIsActive)
+	if (blocked)
 	{
-		if (CanUse() == true)
+		blockedDuration = 10.f;
+		blocked = false;
+	}
+	if (blockedDuration > 0.f)
+	{
+		blockedDuration -= DeltaTime;
+	}
+	else {
+		TimeToNextUse -= DeltaTime;
+		if (bIsActive)
 		{
+			if (CanUse() == true)
+			{
 				Use();
+			}
 		}
 	}
 }
@@ -55,15 +66,17 @@ bool UBETAbilityComponent::ServerActivateAbility_Validate()
 
 void UBETAbilityComponent::ServerActivateAbility_Implementation()
 {
-
+	ActivateAbility();
 }
 
 void UBETAbilityComponent::SetTime()
 {
-	if (this->TimeToNextUse <= 0.f)
-	{
-		this->TimeToNextUse = 0.f;
-	}
-	this->TimeToNextUse = this->Cooldown;
-	//this->TimeToNextUse +=25.f;
+	blocked = true;
+}
+
+
+void UBETAbilityComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(UBETAbilityComponent, TimeToNextUse);
 }

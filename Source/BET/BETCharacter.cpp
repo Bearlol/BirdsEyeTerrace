@@ -84,7 +84,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
 		InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 		InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
-		InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
+		InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ServerActivateAbility);
 	
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
@@ -308,6 +308,7 @@ void ABETCharacter::SetBlocked()
 {
 	ActiveAbility->SetTime();
 }
+
 
 float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
 {

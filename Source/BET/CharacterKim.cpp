@@ -18,9 +18,10 @@ void ACharacterKim::OnRep_Controller()
 {
 	Super::OnRep_Controller();
 
-//	MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(GetController()), MiniMapWidgetClass);
-//	MiniMapWidget->AddToViewport();
+	//MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(GetController()), MiniMapWidgetClass);
+	//MiniMapWidget->AddToViewport();
 }
+
 
 void ACharacterKim::MoveForward(float Value)
 {
@@ -36,13 +37,14 @@ void ACharacterKim::MoveForward(float Value)
 
 void ACharacterKim::MoveRight(float Value)
 {
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorRightVector(), Value);
-		if (ActiveAbility->bIsActive == true) {
-			ActiveAbility->DeactivateAbility();
+//	if (Stunned->isActive == false) {
+		if (Value != 0.0f)
+		{
+			// add movement in that direction
+			AddMovementInput(GetActorRightVector(), Value);
+			if (ActiveAbility->bIsActive == true) {
+				ActiveAbility->DeactivateAbility();
+			}
 		}
-	}
-
+//	}
 }

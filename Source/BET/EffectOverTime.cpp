@@ -9,7 +9,8 @@ AEffectOverTime::AEffectOverTime()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	duration = 5.f;
+	maxDuration = 5.f;
+	duration = maxDuration;
 	//InitialLifeSpan = 4.f;
 }
 
@@ -24,11 +25,19 @@ void AEffectOverTime::BeginPlay()
 void AEffectOverTime::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
+	if (isActive) {
+		duration -= DeltaTime;
+		if (duration <= 0)
+		{
+			isActive = false;
+			duration = maxDuration;
+		}
+	}
+	
 }
 
 void AEffectOverTime::SetActive()
 {
-	SetLifeSpan(duration);
+	isActive = true;
 
 }

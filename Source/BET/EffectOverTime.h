@@ -20,8 +20,10 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 	void SetActive();
+	bool isActive = false;
 
 protected:
-	UPROPERTY(EditDefaultsOnly)
 		float duration;
+	UPROPERTY(EditDefaultsOnly)
+		float maxDuration;
 };

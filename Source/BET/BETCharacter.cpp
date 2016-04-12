@@ -47,9 +47,9 @@ ABETCharacter::ABETCharacter()
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	CurrentWeapon = NULL;
-	bReplicates = true;
-	stunned = false;
-	blocked = false;
+	bReplicates = true;	
+	
+
 }
 
 
@@ -83,9 +83,9 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("TurnRate", this, &ABETCharacter::TurnAtRate);
 	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
-		InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
-		InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
-		InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ServerActivateAbility);
+	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ServerActivateAbility);
 	
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
@@ -214,20 +214,24 @@ void ABETCharacter::TouchUpdate(const ETouchIndex::Type FingerIndex, const FVect
 
 void ABETCharacter::MoveForward(float Value)
 {
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
-	}
+
+		if (Value != 0.0f)
+		{
+			// add movement in that direction
+			AddMovementInput(GetActorForwardVector(), Value);
+		}
+	
 }
 
 void ABETCharacter::MoveRight(float Value)
 {
-	if (Value != 0.0f)
-	{
-		// add movement in that direction
-		AddMovementInput(GetActorRightVector(), Value);
-	}
+	//if (Stunned->isActive == false) {
+		if (Value != 0.0f)
+		{
+			// add movement in that direction
+			AddMovementInput(GetActorRightVector(), Value);
+		}
+	//}
 }
 
 void ABETCharacter::TurnAtRate(float Rate)
@@ -303,7 +307,10 @@ ABETWeapon* ABETCharacter::GetWeapon()
 
 void ABETCharacter::SetStunned()
 {
-	stunned = true;
+	//Stunned = true;
+	/*
+	Stunned->SetActive();
+	*/
 }
 
 void ABETCharacter::SetBlocked()

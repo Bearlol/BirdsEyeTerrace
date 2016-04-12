@@ -58,6 +58,9 @@ public:
 	UFUNCTION()
 		void SetBlocked();
 
+	UFUNCTION(Server, Reliable, WithValidation)
+		void OnServerInteract();
+
 	
 protected:
 

@@ -15,14 +15,31 @@ ABETInteractable::ABETInteractable()
 	Collider->BodyInstance.SetCollisionProfileName("InteractableTrigger");
 
 	RootComponent = Collider;
-
+	bReplicates = true;
 
 }
 
 void ABETInteractable::Interact()
 {
-	//GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Yellow, TEXT("INTERACT"));
 	UE_LOG(LogTemp, Display, TEXT("INTERACT"));
 }
+//void ABETInteractable::OnServerInteract()
+//{
+//	
+//}
 
+//void ABETInteractable::OnServerInteract_Implementation()
+//{
+//	Interact();
+//}
+//
+//bool ABETInteractable::OnServerInteract_Validate()
+//{
+//	return true;
+//}
+
+void ABETInteractable::OnOverlap(AActor* OtherActor)
+{
+
+}
 

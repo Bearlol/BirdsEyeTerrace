@@ -3,6 +3,7 @@
 #include "BET.h"
 #include "BETCharacter.h"
 #include "BETProjectile.h"
+#include "BETInteractable.h"
 #include "unrealNetwork.h"
 #include "WeaponPickUp.h"
 #include "Animation/AnimInstance.h"
@@ -114,6 +115,7 @@ void ABETCharacter::OnInteract()
 			{
 				UE_LOG(LogTemp, Display, TEXT("INTERACTABLE FOUND"));
 				Interactable->Interact();
+				//Interactable->OnServerInteract();
 			}
 		}
 		
@@ -328,4 +330,14 @@ float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & Da
 	{
 		Destroy();
 	}
+}
+
+void ABETCharacter::OnServerInteract_Implementation()
+{
+	OnInteract();
+}
+
+bool ABETCharacter::OnServerInteract_Validate()
+{
+	return true;
 }

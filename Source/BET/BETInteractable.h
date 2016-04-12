@@ -17,4 +17,11 @@ public:
 protected:
 	UPROPERTY(EditDefaultsOnly)
 		UBoxComponent* Collider;
+
+protected:
+	UFUNCTION()
+		virtual void OnOverlap(AActor* OtherActor);
+//public:
+//	UFUNCTION(Server, Reliable, WithValidation)
+//		virtual void OnServerInteract();
 };

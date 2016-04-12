@@ -20,7 +20,5 @@ public:
 protected:
 	virtual void MoveForward(float Val) override;
 	virtual void MoveRight(float Val) override;
-private:
-//	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
-//	UMiniMapWidget* MiniMapWidget;
+
 };

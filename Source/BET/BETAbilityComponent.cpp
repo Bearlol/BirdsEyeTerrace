@@ -31,16 +31,7 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 	// ...
-	if (blocked)
-	{
-		blockedDuration = 10.f;
-		blocked = false;
-	}
-	if (blockedDuration > 0.f)
-	{
-		blockedDuration -= DeltaTime;
-	}
-	else {
+
 		TimeToNextUse -= DeltaTime;
 		if (bIsActive)
 		{
@@ -49,7 +40,6 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 				Use();
 			}
 		}
-	}
 }
 
 void UBETAbilityComponent::Use()
@@ -71,7 +61,11 @@ void UBETAbilityComponent::ServerActivateAbility_Implementation()
 
 void UBETAbilityComponent::SetTime()
 {
-	blocked = true;
+	if (TimeToNextUse <= 0)
+	{
+		TimeToNextUse = 0;
+	}
+	TimeToNextUse += 10;
 }
 
 

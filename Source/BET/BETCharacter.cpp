@@ -36,7 +36,7 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	
+	runSpeed = 1.f;
 
 }
 
@@ -67,7 +67,8 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
 	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
-	
+	InputComponent->BindAction("Run", IE_Pressed, this, &ABETCharacter::SetRunning);
+	InputComponent->BindAction("Run", IE_Released, this, &ABETCharacter::EndRunning);
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
@@ -210,7 +211,7 @@ void ABETCharacter::MoveRight(float Value)
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
-			AddMovementInput(GetActorRightVector(), Value);
+			AddMovementInput(GetActorRightVector(), Value) ;
 		}
 	
 }
@@ -238,6 +239,16 @@ bool ABETCharacter::EnableTouchscreenMovement(class UInputComponent* InputCompon
 		InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ABETCharacter::TouchUpdate);
 	}
 	return bResult;
+}
+
+void ABETCharacter::SetRunning()
+{
+	runSpeed = 3.f;
+}
+
+void ABETCharacter::EndRunning()
+{
+	runSpeed = 1.f;
 }
 /*
 void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)

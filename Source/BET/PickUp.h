@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "UnrealNetwork.h"
+
 #include "GameFramework/Actor.h"
 #include "PickUp.generated.h"
 

@@ -22,6 +22,12 @@ ABETInteractable::ABETInteractable()
 void ABETInteractable::Interact()
 {
 	UE_LOG(LogTemp, Display, TEXT("INTERACT"));
+	
+
+	if (InteractAudio != NULL)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this,InteractAudio, GetActorLocation());
+	}
 }
 //void ABETInteractable::OnServerInteract()
 //{
@@ -41,5 +47,11 @@ void ABETInteractable::Interact()
 void ABETInteractable::OnOverlap(AActor* OtherActor)
 {
 
+}
+
+
+void ABETInteractable::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 }
 

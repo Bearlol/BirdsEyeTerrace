@@ -18,9 +18,17 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 		UBoxComponent* Collider;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	class USoundBase* InteractAudio;
+
+	virtual void Tick(float DeltaTime) override;
+
 protected:
 	UFUNCTION()
 		virtual void OnOverlap(AActor* OtherActor);
+
+	
+
 //public:
 //	UFUNCTION(Server, Reliable, WithValidation)
 //		virtual void OnServerInteract();

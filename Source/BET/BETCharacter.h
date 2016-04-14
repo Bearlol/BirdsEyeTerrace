@@ -1,8 +1,6 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
-#include "BETWeapon.h"
-#include "EffectOverTime.h"
 #include "BETInteractable.h"
 #include "BETAbilityComponent.h"
 #include "BETCharacter.generated.h"
@@ -18,17 +16,16 @@ class ABETCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
 	class USkeletalMeshComponent* Mesh1P;
 
-	/** Gun mesh: 1st person view (seen only by self) */
+	/** Gun mesh: 1st person view (seen only by self) 
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* FP_Gun;
-
+	*/
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FirstPersonCameraComponent;
 
 public:
 	ABETCharacter();
-	ABETWeapon* GetWeapon();
 	virtual void BeginPlay() override;
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -37,45 +34,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<class ABETWeapon> WeaponClass;
+	//virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
-	UFUNCTION(Server, Reliable, WithValidation)
-	void PickUpWeapon(class AWeaponPickUp * PickedUpWeapon);
-	UFUNCTION()
-		void HealthPickup();
-	UFUNCTION()
-		void ShieldPickup();
-
-	virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
-	
-	UFUNCTION()
-		void SetStunned();
-	UFUNCTION()
-		void SetBlocked();
-
-	UFUNCTION(Server, Reliable, WithValidation)
-		void OnServerInteract();
 protected:
-/*	UPROPERTY(EditDefaultsOnly)
-	AEffectOverTime* Stunned;
-*/	
-
-	UPROPERTY(EditAnywhere)
-		float Shield;
-
-	UPROPERTY(EditDefaultsOnly)
-		float maxHealth = 10;
-	UPROPERTY(Replicated, Transient)
-		float Health;
 	void OnInteract();
 
-
-	class ABETWeapon *CurrentWeapon;
-//	UPROPERTY(Replicated, Transient)
-	class ABETWeapon *Weapon;
-	/** Fires a projectile. */
-	void OnFire();
 
 	/** Handles moving forward/backward */
 	virtual void MoveForward(float Val);

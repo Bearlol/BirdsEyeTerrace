@@ -43,34 +43,8 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 }
 
 void UBETAbilityComponent::Use()
-{
-	
+{	
 	TimeToNextUse = Cooldown;
 }
 
 
-bool UBETAbilityComponent::ServerActivateAbility_Validate()
-{
-	return true;
-}
-
-void UBETAbilityComponent::ServerActivateAbility_Implementation()
-{
-	ActivateAbility();
-}
-
-void UBETAbilityComponent::SetTime()
-{
-	if (TimeToNextUse <= 0)
-	{
-		TimeToNextUse = 0;
-	}
-	TimeToNextUse += 10;
-}
-
-
-void UBETAbilityComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME(UBETAbilityComponent, TimeToNextUse);
-}

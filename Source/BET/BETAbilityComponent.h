@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "UnrealNetwork.h"
 #include "Components/ActorComponent.h"
 #include "BETAbilityComponent.generated.h"
 
@@ -30,19 +29,12 @@ public:
 	}
 	virtual void DeactivateAbility() { bIsActive = false; }
 	bool bIsActive;
-	UFUNCTION(Server, Reliable, WithValidation)
-		virtual void ServerActivateAbility();
-
-	UFUNCTION()
-		void SetTime();
+	
 protected:
 	virtual void Use();
 	UPROPERTY(EditDefaultsOnly)
 		float Cooldown;
-	UPROPERTY(Replicated, Transient)
-	float TimeToNextUse;	
-	float blockedDuration = 0.f;
-	bool blocked = false;
+	float TimeToNextUse;
 
 
 

@@ -15,6 +15,6 @@ UAbilitySnare::UAbilitySnare()
 void UAbilitySnare::UsedFunction(ABETCharacter* character)
 {
 	if (character != nullptr) {
-		character->SetStunned();
+	//	character->SetStunned();
 	}
 }

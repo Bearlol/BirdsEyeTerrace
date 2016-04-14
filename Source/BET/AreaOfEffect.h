@@ -4,7 +4,6 @@
 
 #include "BETAbilityComponent.h"
 #include "BETCharacter.h"
-#include "EffectOverTime.h"
 #include "AreaOfEffect.generated.h"
 
 /**

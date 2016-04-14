@@ -10,7 +10,7 @@
 /**
  * 
  */
-
+/*
 UCLASS()
 
 class BET_API AWeaponPickUp : public APickUp
@@ -28,4 +28,4 @@ protected:
 
 	virtual void OnOverlap(AActor* OtherActor) override;
 };
-
+*/

@@ -2,14 +2,9 @@
 
 #include "BET.h"
 #include "BETCharacter.h"
-#include "BETProjectile.h"
 #include "BETInteractable.h"
-#include "unrealNetwork.h"
-#include "WeaponPickUp.h"
 #include "Animation/AnimInstance.h"
 #include "GameFramework/InputSettings.h"
-#include "BETProjectileWeapon.h"
-#include "BETWeapon.h"
 
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
@@ -26,9 +21,6 @@ ABETCharacter::ABETCharacter()
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
 
-	Health = 0.5f;
-	Shield = 0.5f;
-
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->AttachParent = GetCapsuleComponent();
@@ -42,12 +34,8 @@ ABETCharacter::ABETCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 
-	Health = maxHealth;
-
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	CurrentWeapon = NULL;
-	bReplicates = true;	
 	
 
 }
@@ -56,13 +44,6 @@ ABETCharacter::ABETCharacter()
 void ABETCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	if (WeaponClass)
-	{
-		FActorSpawnParameters SpawnParameters;
-		SpawnParameters.Instigator = this;
-		Weapon = GetWorld()->SpawnActor<ABETWeapon>(WeaponClass, SpawnParameters);
-		Weapon->AttachRootComponentToActor(this);
-	}
 }
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -72,7 +53,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	// set up gameplay key bindings
 	check(InputComponent);
 	
-	InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
+//	InputComponent->BindAction("Fire", IE_Pressed, this, &ABETCharacter::OnFire);
 	
 	InputComponent->BindAction("Interact", IE_Pressed, this, &ABETCharacter::OnInteract);
 
@@ -85,7 +66,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("LookUpRate", this, &ABETCharacter::LookUpAtRate);
 	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
-	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ServerActivateAbility);
+	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
 	
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
@@ -122,7 +103,7 @@ void ABETCharacter::OnInteract()
 	}
 
 }
-
+/*
 void ABETCharacter::OnFire()
 { 
 	if (Weapon){
@@ -147,7 +128,7 @@ void ABETCharacter::OnFire()
 		}
 	}
 }
-
+*/
 	
 
 
@@ -172,7 +153,7 @@ void ABETCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const FVector 
 	}
 	if( ( FingerIndex == TouchItem.FingerIndex ) && (TouchItem.bMoved == false) )
 	{
-		OnFire();
+
 	}
 	TouchItem.bIsPressed = false;
 }
@@ -225,13 +206,13 @@ void ABETCharacter::MoveForward(float Value)
 
 void ABETCharacter::MoveRight(float Value)
 {
-	//if (Stunned->isActive == false) {
+	
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
 			AddMovementInput(GetActorRightVector(), Value);
 		}
-	//}
+	
 }
 
 void ABETCharacter::TurnAtRate(float Rate)
@@ -258,18 +239,8 @@ bool ABETCharacter::EnableTouchscreenMovement(class UInputComponent* InputCompon
 	}
 	return bResult;
 }
-
-void ABETCharacter::HealthPickup()
-{
-	Health = Health + 0.25f;
-}
-
-void ABETCharacter::ShieldPickup()
-{
-	Shield = Shield + 0.25f;
-}
-
-void ABETCharacter::PickUpWeapon_Implementation(class AWeaponPickUp * PickedUpWeapon)
+/*
+void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
 {	
 		if (PickedUpWeapon->GetWeaponClass())
 		{
@@ -284,41 +255,12 @@ void ABETCharacter::PickUpWeapon_Implementation(class AWeaponPickUp * PickedUpWe
 			//	PickedUpWeapon = NULL;
 		}			
 }
-
-bool ABETCharacter::PickUpWeapon_Validate(class AWeaponPickUp * PickedUpWeapon)
-{
-
-	return true;
-
-}
-
-void ABETCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	DOREPLIFETIME(ABETCharacter, Health);
-//	DOREPLIFETIME(ABETCharacter, Weapon);
-//	DOREPLIFETIME(ABETCharacter, Weapon);
-}
-
-ABETWeapon* ABETCharacter::GetWeapon()
-{
-	return CurrentWeapon;
-}
-
-void ABETCharacter::SetStunned()
-{
-	//Stunned = true;
-	/*
-	Stunned->SetActive();
-	*/
-}
-
-void ABETCharacter::SetBlocked()
-{
-	ActiveAbility->SetTime();
-}
+*/
 
 
+
+
+/*
 float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
 {
 
@@ -338,13 +280,5 @@ float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & Da
 		Destroy();
 	}
 }
+*/
 
-void ABETCharacter::OnServerInteract_Implementation()
-{
-	OnInteract();
-}
-
-bool ABETCharacter::OnServerInteract_Validate()
-{
-	return true;
-}

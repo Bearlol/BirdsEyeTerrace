@@ -13,16 +13,7 @@ UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 	Owner = Cast<ABETCharacter>(this->GetOwner());
 
 }
-/*
-void UClarenceInvisibleAbility::TriggerBody()
-{
-	if (bIsActive == true) {
 
-		Owner->SetActorHiddenInGame(true);
-		if(Owner->GetWeapon())
-			Owner->GetWeapon()->SetActorHiddenInGame(true);
-	}
-}*/
 
 void UClarenceInvisibleAbility::Use()
 	
@@ -31,10 +22,6 @@ void UClarenceInvisibleAbility::Use()
 
 
 		Owner->SetActorHiddenInGame(true);
-		if (Owner->GetWeapon())
-		{
-			Owner->GetWeapon()->SetActorHiddenInGame(true);
-		}
 
 }
 
@@ -43,10 +30,7 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
-	if (Owner->GetWeapon()) 
-	{
-		Owner->GetWeapon()->SetActorHiddenInGame(false);
-	}
+
 	duration = maxDuration;
 }
 

@@ -28,7 +28,7 @@ void ACharacterKim::MoveForward(float Value)
 	if (Value != 0.0f)
 	{
 		// add movement in that direction
-		AddMovementInput(GetActorForwardVector(), Value);
+		AddMovementInput(GetActorForwardVector(), Value* runSpeed);
 		if (ActiveAbility->bIsActive == true) {
 			ActiveAbility->DeactivateAbility();
 		}
@@ -41,7 +41,7 @@ void ACharacterKim::MoveRight(float Value)
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
-			AddMovementInput(GetActorRightVector(), Value);
+			AddMovementInput(GetActorRightVector(), Value* runSpeed);
 			if (ActiveAbility->bIsActive == true) {
 				ActiveAbility->DeactivateAbility();
 			}

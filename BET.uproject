@@ -13,11 +13,5 @@
 				"UMG"
 			]
 		}
-	],
-	"Plugins": [
-		{
-			"Name": "Substance",
-			"Enabled": true
-		}
 	]
 }

@@ -21,7 +21,7 @@ void ACharacterClarence::MoveForward(float Value)
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
-			AddMovementInput(GetActorForwardVector(), Value * runSpeed);
+			AddMovementInput(GetActorForwardVector(), Value);
 			if (ActiveAbility->bIsActive == true) {
 				ActiveAbility->DeactivateAbility();
 			}
@@ -36,7 +36,7 @@ void ACharacterClarence::MoveRight(float Value)
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
-			AddMovementInput(GetActorRightVector(), Value * runSpeed);
+			AddMovementInput(GetActorRightVector(), Value);
 			if (ActiveAbility->bIsActive == true) {
 				ActiveAbility->DeactivateAbility();
 			}

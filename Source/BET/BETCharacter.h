@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 #include "BETInteractable.h"
 #include "BETAbilityComponent.h"
+#include "InteractableDoor.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -45,9 +46,7 @@ protected:
 
 	/** Handles stafing movement, left and right */
 	virtual void MoveRight(float Val);
-	void SetRunning();
-	void EndRunning();
-	float runSpeed;
+
 	/**
 	 * Called via input to turn at a given rate.
 	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate

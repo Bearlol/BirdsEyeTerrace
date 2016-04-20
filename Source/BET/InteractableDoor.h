@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETInteractable.h"
+#include "Components/ActorComponent.h"
 #include "InteractableDoor.generated.h"
 
 /**
@@ -21,7 +22,12 @@ protected:
 
 	bool IsInteracted = false;
 	bool IsOpen = false;
-	virtual void Tick(float DeltaTime) override;
+	
 		
+public:
 	virtual void Interact() override;
+
+	virtual void Tick( float DeltaTime);
+
+	 
 };

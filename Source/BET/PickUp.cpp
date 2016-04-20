@@ -18,7 +18,7 @@ APickUp::APickUp()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->AttachTo(RootComponent);
-
+	bReplicates = true;
 }
 
 void APickUp::OnOverlap(AActor* OtherActor)

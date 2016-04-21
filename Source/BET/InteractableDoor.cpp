@@ -51,19 +51,19 @@ void AInteractableDoor::Tick(float DeltaTime)
 			}
 		}
 	}
-	else if (IsOpen == true && IsInteracted)
-	{
-		TimeToOpen -= DeltaTime;
+	//else if (IsOpen == true && IsInteracted)
+	//{
+	//	TimeToOpen -= DeltaTime;
 
-		AddActorWorldRotation(NewPosition*DeltaTime);
-		UE_LOG(LogTemp, Display, TEXT("closing%f"), NewPosition.Yaw);
-		
-		
-		if (NewPosition.Yaw >= 330.f)
-		{
-			IsInteracted = false;
-			IsOpen = false;
-		}
-	}
+	//	AddActorWorldRotation(NewPosition*DeltaTime);
+	//	UE_LOG(LogTemp, Display, TEXT("closing%f"), NewPosition.Yaw);
+	//	
+	//	
+	//	if (NewPosition.Yaw >= 330.f)
+	//	{
+	//		IsInteracted = false;
+	//		IsOpen = false;
+	//	}
+	//}
 }
 

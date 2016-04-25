@@ -1,0 +1,17 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "BET.h"
+#include "BETVictoryCondition.h"
+
+
+ABETVictoryCondition::ABETVictoryCondition()
+{
+
+}
+
+void ABETVictoryCondition::Interact()
+{
+	UE_LOG(LogTemp, Display, TEXT("You Win the game YAY"));
+}
+
+

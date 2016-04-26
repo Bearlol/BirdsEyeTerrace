@@ -36,6 +36,17 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+	lightIntensity = 7000.f;
+	flashLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("Flashlight"));
+	flashLight->Intensity = lightIntensity;
+	flashLight->bVisible = true;
+	flashLight->AttachParent = FirstPersonCameraComponent;
+	walkSpeed = 300;
+	runSpeed = 600;
+	MAXSTAMINA = 10;
+	stamina = MAXSTAMINA;
+	running = false;
+	power = true;
 	Key = false;
 
 }
@@ -67,11 +78,34 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("MoveForward", this, &ABETCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ABETCharacter::MoveRight);
 	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
-	
+	InputComponent->BindAction("SetRun", IE_Pressed, this, &ABETCharacter::SetRun);
+	InputComponent->BindAction("SetRun", IE_Released, this, &ABETCharacter::EndRun);
+
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
 
+
+void ABETCharacter::SetLight()
+{
+	flashLight->ToggleVisibility();
+	power = !power;
+}
+void ABETCharacter::SetRun()
+{
+	if (stamina > 3)
+	{
+		running = true;
+		this->GetCharacterMovement()->MaxWalkSpeed = runSpeed;
+	}
+
+}
+
+void ABETCharacter::EndRun()
+{
+	this->GetCharacterMovement()->MaxWalkSpeed = walkSpeed;
+	running = false;
+}
 
 
 void ABETCharacter::OnInteract()
@@ -265,6 +299,27 @@ void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
 
 
 
+void ABETCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (running)
+	{
+		stamina -= DeltaTime;
+		if (stamina <= 0)
+		{
+			EndRun();
+		}
+	}
+	else
+	{
+		if (stamina < MAXSTAMINA) {
+			stamina += DeltaTime / 2;
+		}
+		else {
+			stamina = MAXSTAMINA;
+		}
+	}
+}
 
 /*
 float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)

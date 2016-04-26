@@ -37,11 +37,22 @@ public:
 
 	//virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
+	float runSpeed;
+	float walkSpeed;
+	class USpotLightComponent* flashLight;
 
 
 protected:
 	void OnInteract();
-
+	float lightIntensity;
+	void SetLight();
+	void SetRun();
+	void EndRun();
+	bool power;
+	bool running;
+	float MAXSTAMINA;
+	float stamina;
+	virtual void Tick(float DeltaTime) override;
 	
 	/** Handles moving forward/backward */
 	virtual void MoveForward(float Val);

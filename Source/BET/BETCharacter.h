@@ -3,7 +3,7 @@
 #include "GameFramework/Character.h"
 #include "BETInteractable.h"
 #include "BETAbilityComponent.h"
-#include "InteractableDoor.h"
+//#include "InteractableDoor.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -37,10 +37,12 @@ public:
 
 	//virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
+
+
 protected:
 	void OnInteract();
 
-
+	
 	/** Handles moving forward/backward */
 	virtual void MoveForward(float Val);
 
@@ -93,5 +95,11 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	void OnKey();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool Key;
+
+	bool GetKey();
 };
 

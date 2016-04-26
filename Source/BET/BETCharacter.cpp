@@ -36,7 +36,7 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	
+	Key = false;
 
 }
 
@@ -71,6 +71,9 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
+
+
+
 void ABETCharacter::OnInteract()
 {
 	FCollisionQueryParams TraceParams(FName(TEXT("Interact Trace")), true);
@@ -81,7 +84,7 @@ void ABETCharacter::OnInteract()
 	// Re-init hit info
 
 	TArray<FOverlapResult>Overlaps;
-
+	
 	if (GetWorld()->OverlapMultiByChannel(Overlaps,
 		GetActorLocation(),
 		FQuat(),
@@ -91,19 +94,18 @@ void ABETCharacter::OnInteract()
 	{
 		for (FOverlapResult Result : Overlaps)
 		{
-			if (ABETInteractable* Interactable = Cast<ABETInteractable>(Result.Actor.Get()))
-			{
-				UE_LOG(LogTemp, Display, TEXT("INTERACTABLE FOUND"));
-				Interactable->Interact();
-				//Interactable->OnServerInteract();
-			}
-			if (AInteractableDoor* InteractableDoor = Cast<AInteractableDoor>(Result.Actor.Get()))
-			{
-				UE_LOG(LogTemp, Display, TEXT("Door Interacted With!"))
-					InteractableDoor->Interact();
-			}
+			//if (ABETInteractable->InteractAudio != NULL)
+			//{
+				//UGameplayStatics::PlaySoundAtLocation(this, ABETInteractable->InteractableAudio, GetActorLocation());
+
+				if (ABETInteractable* Interactable = Cast<ABETInteractable>(Result.Actor.Get()))
+				{
+					UE_LOG(LogTemp, Display, TEXT("INTERACTABLE FOUND"));
+					Interactable->Interact();
+					//Interactable->OnServerInteract();
+				}
+			//}
 		}
-		
 	}
 
 }
@@ -286,3 +288,12 @@ float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & Da
 }
 */
 
+void ABETCharacter::OnKey()
+{
+	Key = true;
+}
+
+bool ABETCharacter::GetKey()
+{
+	return Key;
+}

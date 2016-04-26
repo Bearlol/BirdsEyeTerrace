@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BETInteractable.h"
+#include "BETCharacter.h"
 #include "Components/ActorComponent.h"
 #include "InteractableDoor.generated.h"
 
@@ -18,16 +19,21 @@ class BET_API AInteractableDoor : public ABETInteractable
 
 protected:
 
+
 	float TimeToOpen;
 
 	bool IsInteracted = false;
 	bool IsOpen = false;
 	
-		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool Locked = false;
 public:
 	virtual void Interact() override;
 
 	virtual void Tick( float DeltaTime);
+	
+	ABETCharacter* Character;
 
-	 
+	UFUNCTION()
+		virtual void OnOverlap(AActor* OtherActor);
 };

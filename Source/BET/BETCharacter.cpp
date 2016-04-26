@@ -36,9 +36,9 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	lightIntensity = 7000.f;
+	lightIntensity = 10000.f;
 	flashLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("Flashlight"));
-	flashLight->Intensity = lightIntensity;
+	flashLight->SetIntensity(lightIntensity);
 	flashLight->bVisible = true;
 	flashLight->AttachParent = FirstPersonCameraComponent;
 	walkSpeed = 300;
@@ -80,11 +80,14 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAction("UseActiveAbility", IE_Pressed, ActiveAbility, &UBETAbilityComponent::ActivateAbility);
 	InputComponent->BindAction("SetRun", IE_Pressed, this, &ABETCharacter::SetRun);
 	InputComponent->BindAction("SetRun", IE_Released, this, &ABETCharacter::EndRun);
-
+	InputComponent->BindAction("SetLight", IE_Pressed, this, &ABETCharacter::SetLight);
 	//InputComponent->BindAction("UseActiveAbility", IE_Released, ActiveAbility, &UBETAbilityComponent::DeactivateAbility);
 }
 
-
+void ABETCharacter::SetBattery() {
+	lightIntensity = 10000;
+	flashLight->SetIntensity(lightIntensity);
+}
 
 void ABETCharacter::SetLight()
 {
@@ -317,6 +320,18 @@ void ABETCharacter::Tick(float DeltaTime)
 		}
 		else {
 			stamina = MAXSTAMINA;
+		}
+	}
+	if (power)
+	{
+		if (lightIntensity <= 0)
+		{		power = !power;
+		flashLight->ToggleVisibility();
+		lightIntensity = 20;
+		}
+		else {
+			lightIntensity -= DeltaTime * 400;
+			flashLight->SetIntensity(lightIntensity);
 		}
 	}
 }

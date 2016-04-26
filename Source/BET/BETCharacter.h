@@ -34,7 +34,7 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
-
+	void SetBattery();
 	//virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
 	float runSpeed;

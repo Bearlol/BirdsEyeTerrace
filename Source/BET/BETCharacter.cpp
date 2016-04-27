@@ -330,7 +330,7 @@ void ABETCharacter::Tick(float DeltaTime)
 		lightIntensity = 20;
 		}
 		else {
-			lightIntensity -= DeltaTime * 400;
+			lightIntensity -= DeltaTime * 12;
 			flashLight->SetIntensity(lightIntensity);
 		}
 	}

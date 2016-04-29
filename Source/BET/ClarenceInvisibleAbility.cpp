@@ -22,6 +22,7 @@ void UClarenceInvisibleAbility::Use()
 
 
 		Owner->SetActorHiddenInGame(true);
+		Owner->SetActorEnableCollision(false);
 
 }
 
@@ -30,7 +31,7 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 {
 	bIsActive = false;
 	Owner->SetActorHiddenInGame(false);
-
+	Owner->SetActorEnableCollision(true);
 	duration = maxDuration;
 }
 

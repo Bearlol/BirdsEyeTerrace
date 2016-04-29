@@ -39,7 +39,7 @@ ABETCharacter::ABETCharacter()
 	lightIntensity = 10000.f;
 	flashLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("Flashlight"));
 	flashLight->SetIntensity(lightIntensity);
-	flashLight->bVisible = true;
+	flashLight->bVisible = false;
 	flashLight->AttachParent = FirstPersonCameraComponent;
 	walkSpeed = 300;
 	runSpeed = 600;

@@ -15,20 +15,22 @@ class BET_API AInteractableDoor : public ABETInteractable
 {
 	GENERATED_BODY()
 
-		AInteractableDoor();
 
 protected:
 
 
+	AInteractableDoor();
 	float TimeToOpen;
 
 	bool IsInteracted = false;
-	bool IsOpen = false;
+
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool Locked = false;
 public:
 	virtual void Interact() override;
+
+	bool IsOpen = false;
 
 	virtual void Tick( float DeltaTime);
 	

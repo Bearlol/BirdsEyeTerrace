@@ -31,6 +31,8 @@ void AInteractableDoor::Tick(float DeltaTime)
 
 	FRotator NewPosition = FRotator(0.0f, (100.f / TimeToOpen), 0.0f);
 
+	//FRotator OriginalPosition = FRotator(0.0f, 0.0f, 0.0f);
+
 	if (IsInteracted && !IsOpen && !Locked)
 	{
 		
@@ -46,10 +48,12 @@ void AInteractableDoor::Tick(float DeltaTime)
 			UGameplayStatics::PlaySoundAtLocation(this, InteractAudio, GetActorLocation());
 			UE_LOG(LogTemp, Display, TEXT("opening%f"), NewPosition.Yaw);
 			
+			FRotator HomePosition = GetActorRotation();
 			if (NewPosition.Yaw >= 128.f)
 			{
 				IsInteracted = false;
 				IsOpen = true;
+				
 				
 			}
 		}
@@ -76,11 +80,12 @@ void AInteractableDoor::Tick(float DeltaTime)
 					AddActorWorldRotation((NewPosition*DeltaTime).GetInverse());
 					UGameplayStatics::PlaySoundAtLocation(this, InteractAudio, GetActorLocation());
 					UE_LOG(LogTemp, Display, TEXT("opening%f"), NewPosition.Yaw);
-
+					
 					if (NewPosition.Yaw >= 128.f)
 					{
 						IsInteracted = false;
 						IsOpen = true;
+						
 					}
 				}
 			}
@@ -88,8 +93,8 @@ void AInteractableDoor::Tick(float DeltaTime)
 	}
 
 
-	// CLOSE DOOR
-	/*else if (IsOpen == true && IsInteracted)
+	 //CLOSE DOOR
+	else if (IsOpen == true && IsInteracted)
 	{
 		TimeToOpen -= DeltaTime;
 		AddActorWorldRotation(NewPosition*DeltaTime);
@@ -98,22 +103,9 @@ void AInteractableDoor::Tick(float DeltaTime)
 		{
 			IsInteracted = false;
 			IsOpen = false;
+			
+			//SetActorRotation(OriginalPosition);
 		}
-	}*/
-
-	//else if (IsOpen == true && IsInteracted)
-	//{
-	//	TimeToOpen -= DeltaTime;
-
-	//	AddActorWorldRotation(NewPosition*DeltaTime);
-	//	UE_LOG(LogTemp, Display, TEXT("closing%f"), NewPosition.Yaw);
-	//	
-	//	
-	//	if (NewPosition.Yaw >= 330.f)
-	//	{
-	//		IsInteracted = false;
-	//		IsOpen = false;
-	//	}
-	//}
+	}
 }
 

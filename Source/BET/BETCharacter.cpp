@@ -87,12 +87,14 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 void ABETCharacter::SetBattery() {
 	lightIntensity = 10000;
 	flashLight->SetIntensity(lightIntensity);
+	UGameplayStatics::PlaySoundAtLocation(this, BatteryPickUpAudio, GetActorLocation());
 }
 
 void ABETCharacter::SetLight()
 {
 	flashLight->ToggleVisibility();
 	power = !power;
+	UGameplayStatics::PlaySoundAtLocation(this, FlashlightAudio, GetActorLocation());
 }
 void ABETCharacter::SetRun()
 {
@@ -100,6 +102,8 @@ void ABETCharacter::SetRun()
 	{
 		running = true;
 		this->GetCharacterMovement()->MaxWalkSpeed = runSpeed;
+		UGameplayStatics::PlaySoundAtLocation(this,RunAudio, GetActorLocation());
+		
 	}
 
 }
@@ -243,6 +247,7 @@ void ABETCharacter::MoveForward(float Value)
 		{
 			// add movement in that direction
 			AddMovementInput(GetActorForwardVector(), Value);
+			UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
 		}
 	
 }
@@ -254,6 +259,7 @@ void ABETCharacter::MoveRight(float Value)
 		{
 			// add movement in that direction
 			AddMovementInput(GetActorRightVector(), Value);
+			UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
 		}
 	
 }
@@ -311,6 +317,7 @@ void ABETCharacter::Tick(float DeltaTime)
 		if (stamina <= 0)
 		{
 			EndRun();
+			UGameplayStatics::PlaySoundAtLocation(this, NoStaminaAudio, GetActorLocation());
 		}
 	}
 	else

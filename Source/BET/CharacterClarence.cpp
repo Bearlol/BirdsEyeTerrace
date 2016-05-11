@@ -25,6 +25,14 @@ void ACharacterClarence::MoveForward(float Value)
 			if (ActiveAbility->bIsActive == true) {
 				ActiveAbility->DeactivateAbility();
 			}
+			if (running == false) {
+				if (WalkAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			}
+			if (running == true) {
+				if (RunAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
+			}
 
 		}
 	
@@ -39,6 +47,14 @@ void ACharacterClarence::MoveRight(float Value)
 			AddMovementInput(GetActorRightVector(), Value);
 			if (ActiveAbility->bIsActive == true) {
 				ActiveAbility->DeactivateAbility();
+			}
+			if (running == false) {
+				if (WalkAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			}
+			if (running == true) {
+				if (RunAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
 			}
 		//}
 	}

@@ -87,6 +87,7 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 void ABETCharacter::SetBattery() {
 	lightIntensity = 10000;
 	flashLight->SetIntensity(lightIntensity);
+	if (BatteryPickUpAudio != nullptr)
 	UGameplayStatics::PlaySoundAtLocation(this, BatteryPickUpAudio, GetActorLocation());
 }
 
@@ -94,6 +95,7 @@ void ABETCharacter::SetLight()
 {
 	flashLight->ToggleVisibility();
 	power = !power;
+	if(FlashlightAudio != nullptr)
 	UGameplayStatics::PlaySoundAtLocation(this, FlashlightAudio, GetActorLocation());
 }
 void ABETCharacter::SetRun()
@@ -101,9 +103,7 @@ void ABETCharacter::SetRun()
 	if (stamina > 3)
 	{
 		running = true;
-		this->GetCharacterMovement()->MaxWalkSpeed = runSpeed;
-		UGameplayStatics::PlaySoundAtLocation(this,RunAudio, GetActorLocation());
-		
+		this->GetCharacterMovement()->MaxWalkSpeed = runSpeed;		
 	}
 
 }
@@ -247,7 +247,14 @@ void ABETCharacter::MoveForward(float Value)
 		{
 			// add movement in that direction
 			AddMovementInput(GetActorForwardVector(), Value);
-			UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			if (running == false) {
+				if(WalkAudio != nullptr)
+				UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			}
+			if (running == true) {
+				if(RunAudio != nullptr)
+				UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
+			}
 		}
 	
 }
@@ -259,7 +266,14 @@ void ABETCharacter::MoveRight(float Value)
 		{
 			// add movement in that direction
 			AddMovementInput(GetActorRightVector(), Value);
-			UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			if (running == false) {
+				if (WalkAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+			}
+			if (running == true) {
+				if (RunAudio != nullptr)
+					UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
+			}
 		}
 	
 }
@@ -317,6 +331,7 @@ void ABETCharacter::Tick(float DeltaTime)
 		if (stamina <= 0)
 		{
 			EndRun();
+			if(NoStaminaAudio != nullptr)
 			UGameplayStatics::PlaySoundAtLocation(this, NoStaminaAudio, GetActorLocation());
 		}
 	}

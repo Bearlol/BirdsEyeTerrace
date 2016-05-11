@@ -10,7 +10,7 @@ ASecretPassage::ASecretPassage()
 	InteractAudio = NULL;
 	PrimaryActorTick.bCanEverTick = true;
 	TimeToOpen = 2.f;
-	OnActorBeginOverlap.AddDynamic(this, &ASecretPassage::OnOverlap);
+//	OnActorBeginOverlap.AddDynamic(this, &ASecretPassage::OnOverlap);
 }
 
 

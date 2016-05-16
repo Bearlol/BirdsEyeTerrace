@@ -9,8 +9,8 @@ UAbilityMap::UAbilityMap()
 {
 
 	Owner = Cast<ABETCharacter>(this->GetOwner());
-	static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
-	MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
+	//static ConstructorHelpers::FObjectFinder<UBlueprint> MiniMapWidgetAsset(TEXT("/Game/MiniMapWidget"));
+	//MiniMapWidgetClass = Cast<UClass>(MiniMapWidgetAsset.Object->GeneratedClass);
 	Cooldown = 500000.f;
 	
 }
@@ -19,8 +19,8 @@ void UAbilityMap::Use()
 
 {
 	Super::Use();
-	MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(Owner->GetController()), MiniMapWidgetClass);
-	MiniMapWidget->AddToViewport();
+	//MiniMapWidget = CreateWidget<UMiniMapWidget>(Cast<APlayerController>(Owner->GetController()), MiniMapWidgetClass);
+	//MiniMapWidget->AddToViewport();
 }
 
 
@@ -28,7 +28,7 @@ void UAbilityMap::DeactivateAbility()
 {
 	Super::DeactivateAbility();
 	TimeToNextUse = 0.f;
-	MiniMapWidget->RemoveFromViewport();
+	//MiniMapWidget->RemoveFromViewport();
 	
 }
 

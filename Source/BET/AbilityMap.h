@@ -23,7 +23,7 @@ protected:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 private:
-	TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
-	UMiniMapWidget* MiniMapWidget;
+	//TSubclassOf<UMiniMapWidget> MiniMapWidgetClass;
+	//UMiniMapWidget* MiniMapWidget;
 	
 };

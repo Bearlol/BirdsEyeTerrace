@@ -31,7 +31,7 @@ void AInteractableDoor::Tick(float DeltaTime)
 
 	FRotator NewPosition = FRotator(0.0f, (100.f / TimeToOpen), 0.0f);
 
-	
+	//FRotator OriginalPosition = FRotator(0.0f, 0.0f, 0.0f);
 
 	if (IsInteracted && !IsOpen && !Locked)
 	{

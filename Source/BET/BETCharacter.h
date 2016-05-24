@@ -3,6 +3,7 @@
 #include "GameFramework/Character.h"
 #include "BETInteractable.h"
 #include "BETAbilityComponent.h"
+//#include "InteractableDoor.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;

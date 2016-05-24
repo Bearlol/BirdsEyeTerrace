@@ -55,6 +55,7 @@ public:
 
 	float runSpeed;
 	float walkSpeed;
+	UPROPERTY(EditDefaultsOnly)
 	class USpotLightComponent* flashLight;
 
 

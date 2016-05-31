@@ -4,24 +4,25 @@
 
 #include "BETInteractable.h"
 #include "BETCharacter.h"
-#include "BETVictoryCondition.generated.h"
+#include "BETEscape.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class BET_API ABETVictoryCondition : public ABETInteractable
+class BET_API ABETEscape : public ABETInteractable
 {
 	GENERATED_BODY()
 
-		ABETVictoryCondition();
+		ABETEscape();
 
 protected:
 	virtual void Interact() override;
 	UFUNCTION()
 		virtual void OnOverlap(AActor* OtherActor);
-	
+
 
 public:
 	ABETCharacter* Character;
 };
+

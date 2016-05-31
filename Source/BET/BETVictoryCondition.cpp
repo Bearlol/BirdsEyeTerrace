@@ -6,12 +6,19 @@
 
 ABETVictoryCondition::ABETVictoryCondition()
 {
-
+	Character = nullptr;
+	OnActorBeginOverlap.AddDynamic(this, &ABETVictoryCondition::OnOverlap);
 }
 
 void ABETVictoryCondition::Interact()
 {
-	UE_LOG(LogTemp, Display, TEXT("You Win the game YAY"));
+	if (Character != nullptr) {
+		Character->SetWin();
+	}
 }
 
 
+void ABETVictoryCondition::OnOverlap(AActor* OtherActor)
+{
+	Character = Cast<ABETCharacter>(OtherActor);
+}

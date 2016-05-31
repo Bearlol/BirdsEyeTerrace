@@ -48,7 +48,7 @@ ABETCharacter::ABETCharacter()
 	running = false;
 	power = true;
 	Key = false;
-
+	canLeave = false;
 }
 
 
@@ -108,6 +108,15 @@ void ABETCharacter::SetRun()
 
 }
 
+void ABETCharacter::SetWin() 
+{
+	canLeave = true;
+}
+
+bool ABETCharacter::GetCanLeave()
+{
+	return canLeave;
+}
 void ABETCharacter::EndRun()
 {
 	this->GetCharacterMovement()->MaxWalkSpeed = walkSpeed;

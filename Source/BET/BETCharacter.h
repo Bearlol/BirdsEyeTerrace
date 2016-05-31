@@ -36,6 +36,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 	void SetBattery();
+	void SetWin();
+	bool GetCanLeave();
 	//virtual float TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
@@ -69,6 +71,7 @@ protected:
 	bool running;
 	float MAXSTAMINA;
 	float stamina;
+	bool canLeave;
 	virtual void Tick(float DeltaTime) override;
 	
 	/** Handles moving forward/backward */

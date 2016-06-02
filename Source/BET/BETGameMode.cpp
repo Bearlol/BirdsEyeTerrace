@@ -3,7 +3,6 @@
 #include "BET.h"
 #include "GameFramework/GameState.h"
 #include "BETGameMode.h"
-#include "BETHUD.h"
 #include "BETCharacter.h"
 
 ABETGameMode::ABETGameMode()
@@ -14,8 +13,6 @@ ABETGameMode::ABETGameMode()
 	
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
-	// use our custom HUD class
-	HUDClass = ABETHUD::StaticClass();
 
 }
 

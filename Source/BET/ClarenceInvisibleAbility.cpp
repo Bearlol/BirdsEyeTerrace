@@ -8,8 +8,8 @@
 UClarenceInvisibleAbility::UClarenceInvisibleAbility()
 	: Super()
 {
-	maxDuration = 10.f;
-	duration = 10.f;
+	maxDuration = 15.f;
+	duration = 15.f;
 	Owner = Cast<ABETCharacter>(this->GetOwner());
 
 }

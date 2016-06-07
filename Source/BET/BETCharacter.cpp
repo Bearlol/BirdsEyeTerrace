@@ -36,14 +36,16 @@ ABETCharacter::ABETCharacter()
 
 	// Note: The ProjectileClass and the skeletal mesh/anim blueprints for Mesh1P are set in the
 	// derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	lightIntensity = 10000.f;
+	lightIntensity = 15000.f;
 	flashLight = CreateDefaultSubobject<USpotLightComponent>(TEXT("Flashlight"));
 	flashLight->SetIntensity(lightIntensity);
+	flashLight->SetAttenuationRadius(2000.0f);
 	flashLight->bVisible = true;
 	flashLight->AttachParent = FirstPersonCameraComponent;
 	walkSpeed = 300;
 	runSpeed = 600;
 	MAXSTAMINA = 10;
+	widgetChecker = 0;
 	stamina = MAXSTAMINA;
 	running = false;
 	power = true;
@@ -85,10 +87,11 @@ void ABETCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 }
 
 void ABETCharacter::SetBattery() {
-	lightIntensity = 10000;
+	lightIntensity = 15000;
 	flashLight->SetIntensity(lightIntensity);
 	if (BatteryPickUpAudio != nullptr)
 	UGameplayStatics::PlaySoundAtLocation(this, BatteryPickUpAudio, GetActorLocation());
+	widgetChecker = 1;
 }
 
 void ABETCharacter::SetLight()
@@ -361,8 +364,86 @@ void ABETCharacter::Tick(float DeltaTime)
 		lightIntensity = 20;
 		}
 		else {
-			lightIntensity -= DeltaTime * 12;
+			lightIntensity -= DeltaTime * 200;
 			flashLight->SetIntensity(lightIntensity);
+			if (lightIntensity >= 12000.f)
+			{
+				if (widgetChecker == 1)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidgetFull);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 2;
+				}
+			}
+			else if (lightIntensity < 12000.f && lightIntensity >= 9000.f)
+			{
+				if (widgetChecker == 2)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidget80);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 3;
+				}
+			}
+			else if (lightIntensity < 9000.f && lightIntensity >= 6000.f)
+			{
+				if (widgetChecker == 3)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidget60);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 4;
+				}
+			}
+			else if (lightIntensity < 6000.f && lightIntensity >= 3000.f)
+			{
+				if (widgetChecker == 4)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidget40);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 5;
+				}
+			}
+			else if (lightIntensity < 3000.f && lightIntensity > 0.f)
+			{
+				if (widgetChecker == 5)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidget20);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 6;
+				}
+			}
+			else if (lightIntensity <= 0.f)
+			{
+				if (widgetChecker == 6)
+				{
+					WidgetBattery->RemoveFromViewport();
+					WidgetBattery = NULL;
+				}
+				if (WidgetBattery == NULL) {
+					WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidgetEmpty);
+					WidgetBattery->AddToViewport();
+					widgetChecker = 7;
+				}
+			}
 		}
 	}
 }

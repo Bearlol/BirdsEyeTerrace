@@ -3,7 +3,7 @@
 #include "GameFramework/Character.h"
 #include "BETInteractable.h"
 #include "BETAbilityComponent.h"
-//#include "InteractableDoor.h"
+#include "Blueprint/UserWidget.h"
 #include "BETCharacter.generated.h"
 
 class UInputComponent;
@@ -72,7 +72,35 @@ protected:
 	float MAXSTAMINA;
 	float stamina;
 	bool canLeave;
+	int widgetChecker;
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidgetFull;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidget80;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidget60;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidget40;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidget20;
+
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIBatteryWidgetEmpty;
+
+
+	UPROPERTY()
+		UUserWidget* WidgetBattery;
 	
 	/** Handles moving forward/backward */
 	virtual void MoveForward(float Val);

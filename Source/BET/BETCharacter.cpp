@@ -27,6 +27,8 @@ ABETCharacter::ABETCharacter()
 	FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 64.f); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
 
+	
+
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);
@@ -53,12 +55,14 @@ ABETCharacter::ABETCharacter()
 	power = true;
 	Key = false;
 	canLeave = false;
+
 }
 
 
 void ABETCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	UGameplayStatics::PlaySoundAtLocation(this, Music, GetActorLocation());
 }
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -263,19 +267,20 @@ void ABETCharacter::MoveForward(float Value)
 			AddMovementInput(GetActorForwardVector(), Value);
 			if (running == false) {
 				if(WalkAudio != nullptr)
-				UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+				{
+						UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
+				}
 			}
-			if (running == true) {
-				if(RunAudio != nullptr)
-				UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
+			if (running == true){
+				if (RunAudio != nullptr) {
+					UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
+				}
 			}
 		}
-	
 }
 
 void ABETCharacter::MoveRight(float Value)
 {
-	
 		if (Value != 0.0f)
 		{
 			// add movement in that direction
@@ -284,12 +289,11 @@ void ABETCharacter::MoveRight(float Value)
 				if (WalkAudio != nullptr)
 					UGameplayStatics::PlaySoundAtLocation(this, WalkAudio, GetActorLocation());
 			}
-			if (running == true) {
+			if (running == true ) {
 				if (RunAudio != nullptr)
 					UGameplayStatics::PlaySoundAtLocation(this, RunAudio, GetActorLocation());
 			}
 		}
-	
 }
 
 void ABETCharacter::TurnAtRate(float Rate)

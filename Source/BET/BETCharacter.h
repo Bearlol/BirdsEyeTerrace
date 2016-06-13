@@ -54,6 +54,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 		class USoundBase* BatteryPickUpAudio;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+		class USoundBase* Music;
+
 	float runSpeed;
 	float walkSpeed;
 	UPROPERTY(EditDefaultsOnly)
@@ -73,6 +76,7 @@ protected:
 	bool canLeave;
 	int widgetChecker;
 	virtual void Tick(float DeltaTime) override;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
 		TSubclassOf<UUserWidget> UIBatteryWidgetFull;

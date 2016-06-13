@@ -4,6 +4,9 @@
 
 #include "BETInteractable.h"
 #include "BETCharacter.h"
+#include "SlateCore.h"
+#include "Engine.h"
+#include "Blueprint/UserWidget.h"
 #include "BETVictoryCondition.generated.h"
 
 /**
@@ -20,8 +23,21 @@ protected:
 	virtual void Interact() override;
 	UFUNCTION()
 		virtual void OnOverlap(AActor* OtherActor);
-	
-
-public:
 	ABETCharacter* Character;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> UIFithStep;
+
+
+	
+	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY()
+		UUserWidget* WinCondition;
+public:
+	
+	float duration;
+	bool WidgetActive;
+
+	
 };

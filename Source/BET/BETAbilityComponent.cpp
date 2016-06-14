@@ -43,8 +43,9 @@ void UBETAbilityComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 }
 
 void UBETAbilityComponent::Use()
-{	
+{
 	TimeToNextUse = Cooldown;
-}
 
+
+}
 

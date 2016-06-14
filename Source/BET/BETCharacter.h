@@ -77,6 +77,7 @@ protected:
 	int widgetChecker;
 	virtual void Tick(float DeltaTime) override;
 
+	
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
 		TSubclassOf<UUserWidget> UIBatteryWidgetFull;
@@ -104,7 +105,7 @@ protected:
 
 	UPROPERTY()
 		UUserWidget* WidgetBattery;
-	
+
 	/** Handles moving forward/backward */
 	virtual void MoveForward(float Val);
 

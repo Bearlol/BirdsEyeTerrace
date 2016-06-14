@@ -25,7 +25,5 @@ public:
 	UPROPERTY(EditInstanceOnly)
 		AActor* TargetLocation;
 
-	ABETCharacter* Character;
-	
-	
+	ABETCharacter* Character;	
 };

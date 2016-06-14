@@ -320,24 +320,6 @@ bool ABETCharacter::EnableTouchscreenMovement(class UInputComponent* InputCompon
 	}
 	return bResult;
 }
-/*
-void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
-{	
-		if (PickedUpWeapon->GetWeaponClass())
-		{
-
-			ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
-			Weapon->AttachRootComponentTo(GetMesh(), TEXT("BN_R_Weapon01"), EAttachLocation::SnapToTarget);
-			//BN_R_Weapon01 will change depending on the name of the hand bone.
-			if (CurrentWeapon) {
-				CurrentWeapon->Destroy();
-			}
-			CurrentWeapon = Weapon;
-			//	PickedUpWeapon = NULL;
-		}			
-}
-*/
-
 
 
 void ABETCharacter::Tick(float DeltaTime)
@@ -454,27 +436,6 @@ void ABETCharacter::Tick(float DeltaTime)
 	}
 }
 
-/*
-float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
-{
-
-
-	if (Role == ROLE_Authority)
-	{
-		float actualDamage = Super::TakeDamage(TakeDamage, DamageEvent, EventInstigator, DamageCauser);
-		Health -= actualDamage;
-	}
-
-	return 0.f;
-
-
-	//uncomment for death!!!!
-	if (Health <= 0)
-	{
-		Destroy();
-	}
-}
-*/
 
 void ABETCharacter::OnKey()
 {
@@ -485,3 +446,39 @@ bool ABETCharacter::GetKey()
 {
 	return Key;
 }
+
+
+/*
+void ABETCharacter::PickUpWeapon(class AWeaponPickUp * PickedUpWeapon)
+{
+if (PickedUpWeapon->GetWeaponClass())
+{
+
+ABETWeapon*Weapon = GetWorld()->SpawnActor<ABETWeapon>(PickedUpWeapon->GetWeaponClass(), FVector::ZeroVector, FRotator::ZeroRotator);
+Weapon->AttachRootComponentTo(GetMesh(), TEXT("BN_R_Weapon01"), EAttachLocation::SnapToTarget);
+//BN_R_Weapon01 will change depending on the name of the hand bone.
+if (CurrentWeapon) {
+CurrentWeapon->Destroy();
+}
+CurrentWeapon = Weapon;
+//	PickedUpWeapon = NULL;
+}
+}
+*/
+
+/*
+float ABETCharacter::TakeDamage(float TakeDamage, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser)
+{
+if (Role == ROLE_Authority)
+{
+float actualDamage = Super::TakeDamage(TakeDamage, DamageEvent, EventInstigator, DamageCauser);
+Health -= actualDamage;
+}
+return 0.f;
+//uncomment for death!!!!
+if (Health <= 0)
+{
+Destroy();
+}
+}
+*/

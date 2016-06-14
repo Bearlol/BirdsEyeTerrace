@@ -4,6 +4,7 @@
 
 #include "BETAbilityComponent.h"
 #include "BETCharacter.h"
+#include "Blueprint/UserWidget.h"
 #include "ClarenceInvisibleAbility.generated.h"
 
 /**
@@ -24,4 +25,8 @@ protected:
 		float maxDuration;
 	virtual void DeactivateAbility() override;
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	UPROPERTY()
+		UUserWidget* AbilityWidget;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
+		TSubclassOf<UUserWidget> ActiveAbilityUI;
 };

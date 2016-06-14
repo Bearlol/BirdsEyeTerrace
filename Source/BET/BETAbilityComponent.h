@@ -37,6 +37,4 @@ protected:
 	float TimeToNextUse;
 
 
-
-	
 };

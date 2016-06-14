@@ -20,7 +20,12 @@ void UClarenceInvisibleAbility::Use()
 {
 	Super::Use();
 
+	if (ActiveAbilityUI != NULL) {
 
+		AbilityWidget = CreateWidget<UUserWidget>(Cast<APlayerController>(Owner->GetController()), ActiveAbilityUI);
+		AbilityWidget->AddToViewport();
+
+	}
 		Owner->SetActorHiddenInGame(true);
 		Owner->SetActorEnableCollision(false);
 
@@ -33,6 +38,8 @@ void UClarenceInvisibleAbility::DeactivateAbility()
 	Owner->SetActorHiddenInGame(false);
 	Owner->SetActorEnableCollision(true);
 	duration = maxDuration;
+	if (ActiveAbilityUI != NULL)
+		AbilityWidget->RemoveFromViewport();
 }
 
 void UClarenceInvisibleAbility::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

@@ -26,7 +26,7 @@ protected:
 	ABETCharacter* Character;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = UI)
-		TSubclassOf<UUserWidget> UIFithStep;
+		TSubclassOf<UUserWidget> UIFifthStep;
 
 
 	

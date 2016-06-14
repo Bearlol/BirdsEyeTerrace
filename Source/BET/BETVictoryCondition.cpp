@@ -21,7 +21,7 @@ void ABETVictoryCondition::Interact()
 			UGameplayStatics::PlaySoundAtLocation(this, InteractAudio, GetActorLocation());
 			this->SetActorHiddenInGame(true);
 			this->SetActorEnableCollision(false);
-			WinCondition = CreateWidget<UUserWidget>(Cast<APlayerController>(Character->GetController()), UIFithStep);
+			WinCondition = CreateWidget<UUserWidget>(Cast<APlayerController>(Character->GetController()), UIFifthStep);
 			WinCondition->AddToViewport();
 			duration = 10.0f;
 			WidgetActive = true;

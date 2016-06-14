@@ -97,7 +97,13 @@ void ABETCharacter::SetBattery() {
 	flashLight->SetIntensity(lightIntensity);
 	if (BatteryPickUpAudio != nullptr)
 	UGameplayStatics::PlaySoundAtLocation(this, BatteryPickUpAudio, GetActorLocation());
-	widgetChecker = 1;
+	WidgetBattery->RemoveFromViewport();
+	WidgetBattery = NULL;
+
+	WidgetBattery = CreateWidget<UUserWidget>(Cast<APlayerController>(this->GetController()), UIBatteryWidgetFull);
+	WidgetBattery->AddToViewport();
+	widgetChecker = 2;
+
 }
 
 void ABETCharacter::SetLight()
